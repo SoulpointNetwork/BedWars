@@ -39,13 +39,10 @@ public class Merchant
     this.title = title;
   }
 
-  @SuppressWarnings("unchecked")
-public List<MerchantOffer> getOffers()
+  public List<MerchantOffer> getOffers()
   {
-    @SuppressWarnings("rawtypes")
-	List offerList = new ArrayList();
-    for (@SuppressWarnings("rawtypes")
-	Iterator localIterator = ((List)this.h.getOffers(null)).iterator(); localIterator.hasNext(); ) { Object recipe = localIterator.next();
+    List offerList = new ArrayList();
+    for (Iterator localIterator = ((List)this.h.getOffers(null)).iterator(); localIterator.hasNext(); ) { Object recipe = localIterator.next();
       if (recipe.getClass().isInstance(ReflectionUtils.NMSMerchantRecipe.getNMSClass()))
         offerList.add(new MerchantOffer(new ReflectionUtils.NMSMerchantRecipe(recipe)));
     }

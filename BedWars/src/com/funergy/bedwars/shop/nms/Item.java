@@ -25,8 +25,7 @@ public class Item
 {
   private ItemStack i;
   private ItemMeta m;
-  @SuppressWarnings({ "unchecked", "rawtypes" })
-private List<String> l = new ArrayList();
+  private List<String> l = new ArrayList();
   private byte dyecolor = 20;
   private byte potion = 0;
   LeatherArmorMeta lc;

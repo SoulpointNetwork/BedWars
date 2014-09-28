@@ -22,11 +22,9 @@ import java.util.List;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-@SuppressWarnings("unused")
 public class ReflectionUtils
 {
-  @SuppressWarnings({ "unchecked", "rawtypes" })
-public static Object toEntityHuman(Player player)
+  public static Object toEntityHuman(Player player)
   {
     try
     {
@@ -40,8 +38,7 @@ public static Object toEntityHuman(Player player)
     }return null;
   }
 
-  @SuppressWarnings("rawtypes")
-public static Class getClassByName(String name)
+  public static Class getClassByName(String name)
   {
     try
     {
@@ -51,7 +48,7 @@ public static Class getClassByName(String name)
     }return null;
   }
 
-  public static Object getField(@SuppressWarnings("rawtypes") Class c, Object obj, String key)
+  public static Object getField(Class c, Object obj, String key)
     throws Exception
   {
     Field field = c.getDeclaredField(key);
@@ -59,7 +56,7 @@ public static Class getClassByName(String name)
     return field.get(obj);
   }
 
-  public static void replaceField(@SuppressWarnings("rawtypes") Class c, Object obj, String key, Object value)
+  public static void replaceField(Class c, Object obj, String key, Object value)
     throws Exception
   {
     Field field = c.getDeclaredField(key);
@@ -94,11 +91,9 @@ public static Class getClassByName(String name)
       this(item1, null, item3);
     }
 
-    @SuppressWarnings("unchecked")
-	public NMSMerchantRecipe(Object item1, Object item2, Object item3) {
+    public NMSMerchantRecipe(Object item1, Object item2, Object item3) {
       try {
-        @SuppressWarnings("rawtypes")
-		Class isClass = ReflectionUtils.getClassByName(
+        Class isClass = ReflectionUtils.getClassByName(
           ReflectionUtils.getNMSPackageName() + ".ItemStack");
         this.merchantRecipe = getNMSClass().getDeclaredConstructor(new Class[] { 
           isClass, isClass, isClass }).newInstance(new Object[] { 
@@ -109,14 +104,12 @@ public static Class getClassByName(String name)
       }
     }
 
-    @SuppressWarnings("rawtypes")
-	public static Class getNMSClass() {
+    public static Class getNMSClass() {
       return ReflectionUtils.getClassByName(
         ReflectionUtils.getNMSPackageName() + ".MerchantRecipe");
     }
 
-    @SuppressWarnings("unchecked")
-	public Object getBuyItem1() {
+    public Object getBuyItem1() {
       try {
         Method m = getNMSClass().getDeclaredMethod("getBuyItem1", new Class[0]);
         m.setAccessible(true);
@@ -126,8 +119,7 @@ public static Class getClassByName(String name)
       }return null;
     }
 
-    @SuppressWarnings("unchecked")
-	public Object getBuyItem2()
+    public Object getBuyItem2()
     {
       try {
         Method m = getNMSClass().getDeclaredMethod("getBuyItem2", new Class[0]);
@@ -138,8 +130,7 @@ public static Class getClassByName(String name)
       }return null;
     }
 
-    @SuppressWarnings("unchecked")
-	public Object getBuyItem3()
+    public Object getBuyItem3()
     {
       try {
         Method m = getNMSClass().getDeclaredMethod("getBuyItem3", new Class[0]);
@@ -160,8 +151,7 @@ public static Class getClassByName(String name)
   {
     private Object handle;
 
-    @SuppressWarnings("rawtypes")
-	public static Class getNMSClass()
+    public static Class getNMSClass()
     {
       return ReflectionUtils.getClassByName(
         ReflectionUtils.getNMSPackageName() + ".MerchantRecipeList");
@@ -183,8 +173,7 @@ public static Class getClassByName(String name)
       return this.handle;
     }
 
-    @SuppressWarnings("unchecked")
-	public void clear() {
+    public void clear() {
       try {
         Method m = getNMSClass().getDeclaredMethod("clear", new Class[0]);
         m.setAccessible(true);
@@ -206,8 +195,7 @@ public static Class getClassByName(String name)
       }
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<ReflectionUtils.NMSMerchantRecipe> getRecipes() {
+    public List<ReflectionUtils.NMSMerchantRecipe> getRecipes() {
       List recipeList = new ArrayList();
       for (Iterator localIterator = ((List)this.handle).iterator(); localIterator.hasNext(); ) { Object obj = localIterator.next();
         recipeList.add(new ReflectionUtils.NMSMerchantRecipe(obj));
@@ -218,15 +206,13 @@ public static Class getClassByName(String name)
 
   public static class OBCCraftItemStack
   {
-    @SuppressWarnings("rawtypes")
-	public static Class getOBCClass()
+    public static Class getOBCClass()
     {
       return ReflectionUtils.getClassByName(
         ReflectionUtils.getOBCPackageName() + ".inventory.CraftItemStack");
     }
 
-    @SuppressWarnings("unchecked")
-	public static ItemStack asBukkitCopy(Object nmsItemStack) {
+    public static ItemStack asBukkitCopy(Object nmsItemStack) {
       try {
         Method m = getOBCClass().getDeclaredMethod(
           "asBukkitCopy", new Class[] { 
@@ -239,8 +225,7 @@ public static Class getClassByName(String name)
       }return null;
     }
 
-    @SuppressWarnings("unchecked")
-	public static Object asNMSCopy(ItemStack stack)
+    public static Object asNMSCopy(ItemStack stack)
     {
       try {
         Method m = getOBCClass().getDeclaredMethod("asNMSCopy", new Class[] { 

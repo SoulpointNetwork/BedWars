@@ -16,6 +16,10 @@ import org.bukkit.entity.Player;
  * @author Funergy
  *
  */
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import org.bukkit.entity.Player;
+
 public class NMSMerchant
   implements InvocationHandler
 {
@@ -28,8 +32,7 @@ public class NMSMerchant
     try
     {
       if ((m == null) || (m.getName() == null)) return null;
-      @SuppressWarnings("rawtypes")
-	Class entityHuman = ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".EntityHuman");
+      Class entityHuman = ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".EntityHuman");
       if ((m.getName().equals("a_")) && (args.length == 1) && (args[0] != null) && (args[0].getClass().isInstance(entityHuman))) {
         a_(args[0]); } else {
         if ((m.getName().equals("b")) || (m.getName().equals("m_")))
@@ -60,8 +63,7 @@ public class NMSMerchant
     this.o.add(new ReflectionUtils.NMSMerchantRecipe(recipe));
   }
 
-  @SuppressWarnings({ "rawtypes", "unchecked" })
-public Player getBukkitEntity()
+  public Player getBukkitEntity()
   {
     try
     {
@@ -83,14 +85,12 @@ public Player getBukkitEntity()
     this.o = recipes;
   }
 
-  @SuppressWarnings("unchecked")
-public void openTrading(Object player, String title)
+  public void openTrading(Object player, String title)
   {
     this.c = player;
     try
     {
-      @SuppressWarnings("rawtypes")
-	Class classs = ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".EntityPlayer");
+      Class classs = ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".EntityPlayer");
       Method m = classs.getDeclaredMethod("openTrade", new Class[] { 
         ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".IMerchant"), 
         String.class });
