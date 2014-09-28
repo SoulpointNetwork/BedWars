@@ -8,18 +8,29 @@
  ******************************************************************/
 package com.funergy.bedwars;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.funergy.bedwars.shop.Armor;
 
 /**
  * @author Funergy
  *
  */
 public class Bedwars extends JavaPlugin{
-	 
+	 public Armor armor;
 	public void onEnable() {
-		/*
-		 * Not started this project yet!
-		 */
+
+	}
+	
+	public boolean onCommand(CommandSender sender, Command cmd,
+			String label, String[] args) {
+		if(cmd.getName().equalsIgnoreCase("armor")){
+			armor.open((Player)sender);
+		}
+		return false;
 	}
 
 }

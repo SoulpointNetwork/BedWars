@@ -16,6 +16,7 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -38,10 +39,13 @@ public class Merchant
     this.title = title;
   }
 
-  public List<MerchantOffer> getOffers()
+  @SuppressWarnings("unchecked")
+public List<MerchantOffer> getOffers()
   {
-    List offerList = new ArrayList();
-    for (Iterator localIterator = ((List)this.h.getOffers(null)).iterator(); localIterator.hasNext(); ) { Object recipe = localIterator.next();
+    @SuppressWarnings("rawtypes")
+	List offerList = new ArrayList();
+    for (@SuppressWarnings("rawtypes")
+	Iterator localIterator = ((List)this.h.getOffers(null)).iterator(); localIterator.hasNext(); ) { Object recipe = localIterator.next();
       if (recipe.getClass().isInstance(ReflectionUtils.NMSMerchantRecipe.getNMSClass()))
         offerList.add(new MerchantOffer(new ReflectionUtils.NMSMerchantRecipe(recipe)));
     }

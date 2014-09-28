@@ -10,6 +10,7 @@ package com.funergy.bedwars.shop.nms;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+
 import org.bukkit.entity.Player;
 /**
  * @author Funergy
@@ -27,7 +28,8 @@ public class NMSMerchant
     try
     {
       if ((m == null) || (m.getName() == null)) return null;
-      Class entityHuman = ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".EntityHuman");
+      @SuppressWarnings("rawtypes")
+	Class entityHuman = ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".EntityHuman");
       if ((m.getName().equals("a_")) && (args.length == 1) && (args[0] != null) && (args[0].getClass().isInstance(entityHuman))) {
         a_(args[0]); } else {
         if ((m.getName().equals("b")) || (m.getName().equals("m_")))
@@ -58,7 +60,8 @@ public class NMSMerchant
     this.o.add(new ReflectionUtils.NMSMerchantRecipe(recipe));
   }
 
-  public Player getBukkitEntity()
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+public Player getBukkitEntity()
   {
     try
     {
@@ -80,12 +83,14 @@ public class NMSMerchant
     this.o = recipes;
   }
 
-  public void openTrading(Object player, String title)
+  @SuppressWarnings("unchecked")
+public void openTrading(Object player, String title)
   {
     this.c = player;
     try
     {
-      Class classs = ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".EntityPlayer");
+      @SuppressWarnings("rawtypes")
+	Class classs = ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".EntityPlayer");
       Method m = classs.getDeclaredMethod("openTrade", new Class[] { 
         ReflectionUtils.getClassByName(ReflectionUtils.getNMSPackageName() + ".IMerchant"), 
         String.class });
