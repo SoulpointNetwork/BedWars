@@ -18,12 +18,12 @@ import org.bukkit.entity.Player;
  *
  */
 public class InGameHandler {
-	public HashMap<Player,String> teams = new HashMap<Player,String>();
-	public ArrayList<Player> players = new ArrayList<Player>();
+	public static HashMap<Player,String> teams = new HashMap<Player,String>();
+	public static ArrayList<Player> players = new ArrayList<Player>();
 	
-	public String getTeam(Player p){return teams.get(p);}
+	public static String getTeam(Player p){return teams.get(p);}
 	
-	public boolean isPlaying(Player p){
+	public static boolean isPlaying(Player p){
 		if(players.contains(p))return true;
 		return false;
 	}
