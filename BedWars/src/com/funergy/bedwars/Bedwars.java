@@ -20,15 +20,17 @@ import com.funergy.bedwars.shop.Armor;
  *
  */
 public class Bedwars extends JavaPlugin{
-	 public Armor armor;
+	 public static Bedwars instance;
 	public void onEnable() {
-
+		instance = this;
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("armor")){
-			armor.open((Player)sender);
+			sender.sendMessage("opened");
+			Player p = (Player) sender; 
+			Armor.open(p);
 		}
 		return false;
 	}

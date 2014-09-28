@@ -24,8 +24,8 @@ import com.funergy.bedwars.shop.nms.MerchantOffer;
  */
 public class Armor{
 	
-	public InGameHandler ingame;
-  public void open(Player p)
+	public static InGameHandler ingame;
+  public static void open(Player p)
   {
     Merchant inv = new Merchant();
     inv.setTitle("Armor");

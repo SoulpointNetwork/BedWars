@@ -22,7 +22,6 @@ import com.funergy.bedwars.shop.nms.MerchantOffer;
  *
  */
 public class Pickaxe {
-
 	 public static void open(Player p)
 	  {
 	    Merchant inv = new Merchant();

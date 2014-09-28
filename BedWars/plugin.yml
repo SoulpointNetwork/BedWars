@@ -1,5 +1,7 @@
 name: Bedwars
-main: com.funergy.bedwars.BedWars
+main: com.funergy.bedwars.Bedwars
 version: 1.0.0
 author: Funergy
 description: Bedwars
+commands:
+   armor:
