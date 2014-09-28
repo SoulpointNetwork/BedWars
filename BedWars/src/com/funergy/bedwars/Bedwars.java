@@ -15,10 +15,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  *
  */
 public class Bedwars extends JavaPlugin{
-	 public static Bedwars instance;
 	 
 	public void onEnable() {
-		instance = this;
 		/*
 		 * Not started this project yet!
 		 */

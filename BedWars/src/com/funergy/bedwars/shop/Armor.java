@@ -12,36 +12,37 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Team;
 
 import com.funergy.bedwars.gamemanager.InGameHandler;
+import com.funergy.bedwars.shop.nms.Currency;
+import com.funergy.bedwars.shop.nms.Item;
 import com.funergy.bedwars.shop.nms.Merchant;
+import com.funergy.bedwars.shop.nms.MerchantOffer;
 /**
  * @author Funergy
  *
  */
 public class Armor{
 	
-	public InGameHandler ingamehandler;
-	
-  public static void open(Player p)
+	public InGameHandler ingame;
+  public void open(Player p)
   {
     Merchant inv = new Merchant();
     inv.setTitle("Armor");
 
     Color color = Color.WHITE;
-    if (ingamehandler.) {
-      Team t = BedwarsManager.getGame(p).getTeam(p);
-      if (t.getName().equals("green"))
+     String t = ingame.getTeam(p);
+      if (t.equalsIgnoreCase("green"))
         color = Color.GREEN;
-      if (t.getName().equals("blue"))
+      if (t.equalsIgnoreCase("blue"))
         color = Color.BLUE;
-      if (t.getName().equals("red"))
+      if (t.equalsIgnoreCase("red"))
         color = Color.RED;
-      if (t.getName().equals("yellow")) {
+      if (t.equalsIgnoreCase("yellow")) {
         color = Color.YELLOW;
       }
     }
+  
     Item helmet = new Item(Material.LEATHER_HELMET, 1);
     helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     helmet.addEnchantment(Enchantment.DURABILITY, 1);
@@ -58,18 +59,14 @@ public class Armor{
     boots.setLeatherColor(color);
 
     Item chestplate1 = new Item(Material.CHAINMAIL_CHESTPLATE, 1);
-    chestplate1.setName(Messages.msg(p, "chestplate1"));
     chestplate1.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     chestplate1.addEnchantment(Enchantment.DURABILITY, 1);
 
     Item chestplate2 = new Item(Material.CHAINMAIL_CHESTPLATE, 1);
-    chestplate2.setName(Messages.msg(p, "chestplate2"));
-    chestplate2.setLore(new String[] { "3 " + Messages.msg(p, "iron") });
     chestplate2.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
     chestplate2.addEnchantment(Enchantment.DURABILITY, 1);
 
     Item chestplate3 = new Item(Material.CHAINMAIL_CHESTPLATE, 1);
-    chestplate3.setName(Messages.msg(p, "chestplate3"));
     chestplate3.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
     chestplate3.addEnchantment(Enchantment.DURABILITY, 1);
 
