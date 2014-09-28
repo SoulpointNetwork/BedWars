@@ -35,8 +35,7 @@ public class Blocks {
 	    Item glowstone = new Item(Material.GLOWSTONE, 4);
 	    glowstone.setAmount(4);
 
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 1), sandstone
-	      .getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 1), sandstone.getItem()));
 	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 5), endstone
 	      .getItem()));
 	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 20), glowstone

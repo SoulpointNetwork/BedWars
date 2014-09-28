@@ -27,8 +27,7 @@ import com.funergy.bedwars.shop.Pickaxe;
 import com.funergy.bedwars.shop.Potions;
 import com.funergy.bedwars.shop.Special;
 import com.funergy.bedwars.shop.Weapons;
-
-import utils.SimpleItemStack;
+import com.funergy.bedwars.utils.SimpleItemStack;
 
 /**
  * @author Funergy
