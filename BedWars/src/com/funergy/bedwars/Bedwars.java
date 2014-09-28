@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.funergy.bedwars.categorychooser.ShopCategories;
+import com.funergy.bedwars.events.VillagerRightClick;
 import com.funergy.bedwars.shop.Armor;
 
 /**
@@ -25,6 +26,8 @@ public class Bedwars extends JavaPlugin{
 	 public static Bedwars instance;
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new ShopCategories(), this);
+		Bukkit.getPluginManager().registerEvents(new VillagerRightClick(), this);
+
 		instance = this;
 	}
 	
