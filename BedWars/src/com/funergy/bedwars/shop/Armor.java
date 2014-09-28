@@ -31,7 +31,7 @@ public class Armor{
     inv.setTitle("Armor");
 
     Color color = Color.WHITE;
-     String t = ingame.getTeam(p);
+     /*String t = ingame.getTeam(p);
       if (t.equalsIgnoreCase("green"))
         color = Color.GREEN;
       if (t.equalsIgnoreCase("blue"))
@@ -41,7 +41,7 @@ public class Armor{
       if (t.equalsIgnoreCase("yellow")) {
         color = Color.YELLOW;
       }
-    
+    */
   
     Item helmet = new Item(Material.LEATHER_HELMET, 1);
     helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
