@@ -41,7 +41,7 @@ public class Armor{
       if (t.equalsIgnoreCase("yellow")) {
         color = Color.YELLOW;
       }
-    }
+    
   
     Item helmet = new Item(Material.LEATHER_HELMET, 1);
     helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
