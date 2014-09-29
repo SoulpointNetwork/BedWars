@@ -60,7 +60,7 @@ public class NMSMerchant
   }
 
   public void a(Object recipe) {
-    this.o.add(new ReflectionUtils.NMSMerchantRecipe(recipe));
+	  this.o.add(new ReflectionUtils.NMSMerchantRecipe(recipe));
   }
 
   public Player getBukkitEntity()

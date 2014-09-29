@@ -92,6 +92,7 @@ public class ShopCategories implements Listener {
 			if(e.getCurrentItem().getType() == Material.GOLD_SWORD){
 				Weapons.open(p);
 			}
+			e.setCancelled(true);
 		}
 	}
 

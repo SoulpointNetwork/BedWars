@@ -12,7 +12,6 @@ package com.funergy.bedwars.shop.nms;
  * @author Funergy
  *
  */
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -22,13 +21,14 @@ import java.util.List;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+
 public class ReflectionUtils
 {
   public static Object toEntityHuman(Player player)
   {
     try
     {
-      Class c = getClassByName(getOBCPackageName() + 
+      Class<?> c = getClassByName(getOBCPackageName() + 
         ".entity.CraftPlayer");
       Method m = c.getDeclaredMethod("getHandle", new Class[0]);
       m.setAccessible(true);
@@ -38,7 +38,7 @@ public class ReflectionUtils
     }return null;
   }
 
-  public static Class getClassByName(String name)
+  public static Class<?> getClassByName(String name)
   {
     try
     {
@@ -48,7 +48,7 @@ public class ReflectionUtils
     }return null;
   }
 
-  public static Object getField(Class c, Object obj, String key)
+  public static Object getField(Class<?> c, Object obj, String key)
     throws Exception
   {
     Field field = c.getDeclaredField(key);
@@ -56,7 +56,7 @@ public class ReflectionUtils
     return field.get(obj);
   }
 
-  public static void replaceField(Class c, Object obj, String key, Object value)
+  public static void replaceField(Class<?> c, Object obj, String key, Object value)
     throws Exception
   {
     Field field = c.getDeclaredField(key);
@@ -93,7 +93,7 @@ public class ReflectionUtils
 
     public NMSMerchantRecipe(Object item1, Object item2, Object item3) {
       try {
-        Class isClass = ReflectionUtils.getClassByName(
+        Class<?> isClass = ReflectionUtils.getClassByName(
           ReflectionUtils.getNMSPackageName() + ".ItemStack");
         this.merchantRecipe = getNMSClass().getDeclaredConstructor(new Class[] { 
           isClass, isClass, isClass }).newInstance(new Object[] { 
@@ -104,7 +104,7 @@ public class ReflectionUtils
       }
     }
 
-    public static Class getNMSClass() {
+    public static Class<?> getNMSClass() {
       return ReflectionUtils.getClassByName(
         ReflectionUtils.getNMSPackageName() + ".MerchantRecipe");
     }
@@ -151,7 +151,7 @@ public class ReflectionUtils
   {
     private Object handle;
 
-    public static Class getNMSClass()
+    public static Class<?> getNMSClass()
     {
       return ReflectionUtils.getClassByName(
         ReflectionUtils.getNMSPackageName() + ".MerchantRecipeList");
@@ -196,8 +196,8 @@ public class ReflectionUtils
     }
 
     public List<ReflectionUtils.NMSMerchantRecipe> getRecipes() {
-      List recipeList = new ArrayList();
-      for (Iterator localIterator = ((List)this.handle).iterator(); localIterator.hasNext(); ) { Object obj = localIterator.next();
+      List<NMSMerchantRecipe> recipeList = new ArrayList<NMSMerchantRecipe>();
+      for (Iterator<?> localIterator = ((List<?>)this.handle).iterator(); localIterator.hasNext(); ) { Object obj = localIterator.next();
         recipeList.add(new ReflectionUtils.NMSMerchantRecipe(obj));
       }
       return recipeList;
@@ -206,7 +206,7 @@ public class ReflectionUtils
 
   public static class OBCCraftItemStack
   {
-    public static Class getOBCClass()
+    public static Class<?> getOBCClass()
     {
       return ReflectionUtils.getClassByName(
         ReflectionUtils.getOBCPackageName() + ".inventory.CraftItemStack");

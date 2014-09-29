@@ -17,8 +17,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.server.v1_7_R3.MerchantRecipeList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import com.funergy.bedwars.shop.nms.ReflectionUtils.NMSMerchantRecipe;
+import com.funergy.bedwars.shop.nms.ReflectionUtils.NMSMerchantRecipeList;
 
 public class Merchant
 {
@@ -50,7 +55,8 @@ public class Merchant
   }
 
   public Merchant addOffer(MerchantOffer offer) {
-    this.h.a(offer.getHandle().getMerchantRecipe());
+	  this.h.a(offer.getHandle().getMerchantRecipe());
+    
     return this;
   }
 

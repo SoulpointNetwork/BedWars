@@ -8,6 +8,7 @@
  ******************************************************************/
 package com.funergy.bedwars.shop;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -30,19 +31,25 @@ public class Chest {
 	    Item chest = new Item(Material.CHEST, 1);
 
 	    Item enderchest = new Item(Material.ENDER_CHEST, 1);
-	    String team = InGameHandler.getTeam(p);
+	    enderchest.setName("TeamChest [No team]");
+
+	   /**String team = InGameHandler.getTeam(p);
 	    if(team.equalsIgnoreCase("blue")){
-		    enderchest.setName("TeamChest [Blue]");
-	    }
+		    enderchest.setName(ChatColor.AQUA+"TeamChest [Blue]");
+	    }else
 	    if(team.equalsIgnoreCase("red")){
-		    enderchest.setName("TeamChest [Red]");
-	    }
+		    enderchest.setName(ChatColor.RED+"TeamChest [Red]");
+	    }else
 	    if(team.equalsIgnoreCase("blue")){
-		    enderchest.setName("TeamChest [Green]");
-	    }
+		    enderchest.setName(ChatColor.GREEN+"TeamChest [Green]");
+	    }else
 	    if(team.equalsIgnoreCase("yellow")){
-		    enderchest.setName("TeamChest [Yellow]");
+		    enderchest.setName(ChatColor.GOLD+"TeamChest [Yellow]");
+	    }else{
+		    enderchest.setName("TeamChest [No team]");
+
 	    }
+	    **/
 
 	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 1), chest.getItem()));
 	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 7), enderchest.getItem()));
