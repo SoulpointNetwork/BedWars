@@ -42,14 +42,14 @@ public class Weapons {
 	    gold2.addEnchantment(Enchantment.DURABILITY, 1);
 
 	    Item iron = new Item(Material.IRON_SWORD, 1);
-	    iron.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+	    iron.addEnchantment(Enchantment.DAMAGE_ALL, 2);
 	    iron.addEnchantment(Enchantment.DURABILITY, 1);
 	    iron.addEnchantment(Enchantment.KNOCKBACK, 1);
 	    
 	    Item iron2 = new Item(Material.IRON_SWORD, 1);
-	    iron.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-	    iron.addEnchantment(Enchantment.DURABILITY, 2);
-	    iron.addEnchantment(Enchantment.KNOCKBACK, 2);
+	    iron2.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+	    iron2.addEnchantment(Enchantment.DURABILITY, 2);
+	    iron2.addEnchantment(Enchantment.KNOCKBACK, 2);
 
 	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 10), knockback.getItem()));
 	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 30), knockback2.getItem()));
