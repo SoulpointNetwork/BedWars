@@ -10,7 +10,6 @@ package com.funergy.bedwars;
 
 import java.sql.SQLException;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.WorldCreator;
@@ -29,20 +28,21 @@ import com.funergy.bedwars.mysql.Signs;
  *
  */
 public class Bedwars extends JavaPlugin{
-	 public static Bedwars instance;
-	 int lobbypcount = 0;
-	 int ingamecount = 0;
-	 int spectatecount = 0;
-	 String gameState;
+	static int lobbypcount = 0;
+	static int ingamecount = 0;
+	 static int spectatecount = 0;
+	 static String gameState = "lobby";
 	
-	 String mapName ="Quartz";
-	 String serverName ="BW1";
-	 int id = 0;
+	 static String mapName ="Quartz";
+	 static String serverName ="BW1";
+	 static int id = 0;
+	 public Signs s;
 
-	 String gamePrefix = ChatColor.GRAY+"["+ChatColor.RED+"BedWars"+ChatColor.GRAY+"]: "+ChatColor.WHITE;
+	 static String gamePrefix = ChatColor.GRAY+"["+ChatColor.RED+"BedWars"+ChatColor.GRAY+"]: "+ChatColor.WHITE;
 	
 	public void onEnable() {
-		Signs.openConnection();
+		Signs s = new Signs();
+		s.openConnection();
 		try {
 			Signs.setupDB();
 		} catch (SQLException e) {
@@ -55,7 +55,6 @@ public class Bedwars extends JavaPlugin{
 		Bukkit.getPluginManager().registerEvents(new PlaceBlockEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
 
-		instance = this;
 		/*Bukkit.getServer().createWorld(new WorldCreator("map"));
 		Bukkit.getWorld("map").setAutoSave(false);
 		
@@ -67,21 +66,21 @@ public class Bedwars extends JavaPlugin{
 	}
 
 	
-	public  String getGamePrefix(){return gamePrefix;}
-	public  String getGameState(){return gameState;}
-	public  String getMapName(){return mapName;}
-	public  String getServerName(){return serverName;}
+	public static String getGamePrefix(){return gamePrefix;}
+	public static String getGameState(){return gameState;}
+	public static String getMapName(){return mapName;}
+	public static String getServerName(){return serverName;}
 
-	public void setGameState(String i){gameState=i;}
+	public static void setGameState(String i){gameState=i;}
 	
-	public  Integer getLobbyPCount(){return lobbypcount;}
-	public  Integer getIngameCount(){return ingamecount;}
-	public  Integer getSpectateCount(){return spectatecount;}
-	public  Integer getSignID(){return id;}
+	public static  Integer getLobbyPCount(){return lobbypcount;}
+	public static Integer getIngameCount(){return ingamecount;}
+	public static Integer getSpectateCount(){return spectatecount;}
+	public static Integer getSignID(){return id;}
 
-	public void setIngameCount(Integer i){ingamecount=i;}
-	public void setLobbyCount(Integer i){lobbypcount=i; if(Signs.isInList()){Signs.setPlayerc(i);}}
-	public void setSpectateCount(Integer i){spectatecount=i;}
+	public static void setIngameCount(Integer i){ingamecount=i;}
+	public static void setLobbyCount(Integer i){lobbypcount=i; if(Signs.isInList()){Signs.setPlayerc(i);}}
+	public static void setSpectateCount(Integer i){spectatecount=i;}
 
 	
 	public void putInList(){

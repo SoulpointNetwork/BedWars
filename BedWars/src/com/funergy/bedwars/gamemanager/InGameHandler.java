@@ -21,7 +21,6 @@ import com.funergy.bedwars.Bedwars;
  *
  */
 public class InGameHandler {
-	public static Bedwars plugin = Bedwars.instance;
 	public static HashMap<Player,String> teams = new HashMap<Player,String>();
 	public static ArrayList<Player> red = new ArrayList<Player>();
 	public static ArrayList<Player> blue = new ArrayList<Player>();
@@ -29,7 +28,9 @@ public class InGameHandler {
 	public static ArrayList<Player> yellow = new ArrayList<Player>();
 
 	public static void loadGameSettings(){
-		plugin.setGameState("lobby");
+		Bedwars.setGameState("lobby");{
+		System.out.println("[BedWars] Setting Gamestate to lobby");
+		}
 	}
 	public static String getTeam(Player p){return teams.get(p);}
 	
@@ -50,7 +51,7 @@ public class InGameHandler {
 		for(Player p : Bukkit.getOnlinePlayers()){
 			if(!teams.containsKey(p)){
 				Teams.randomTeam(p);
-				p.sendMessage(plugin.getGamePrefix()+"You are in team "+teams.get(p));
+				p.sendMessage(Bedwars.getGamePrefix()+"You are in team "+teams.get(p));
 			}
 		}
 		//Start dropping stuff

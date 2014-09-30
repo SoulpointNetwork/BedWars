@@ -25,10 +25,9 @@ import com.funergy.bedwars.Bedwars;
  *
  */
 public class LobbyPlayerHandler {
-	public static Bedwars plugin = Bedwars.instance;
 	
 	public static void setLobbyPlayerCount(Integer pcount){
-		plugin.setLobbyCount(pcount);
+		Bedwars.setLobbyCount(pcount);
 	}
 	public static void giveItems(Player p){
 		p.getInventory().setItem(0, itemStack(Material.WOOL,DyeColor.CYAN, 1, "&bBlue team", "Right click to open the GUI"));

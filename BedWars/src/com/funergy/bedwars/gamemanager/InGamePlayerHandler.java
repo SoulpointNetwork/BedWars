@@ -24,7 +24,6 @@ import com.funergy.bedwars.Bedwars;
  *
  */
 public class InGamePlayerHandler {
-	public static Bedwars plugin = Bedwars.instance;
 
 	public static ArrayList<Player> pList = new ArrayList<Player>();
 	
@@ -42,7 +41,7 @@ public class InGamePlayerHandler {
 	}
 	
 	public static void setIngamePlayerCount(Integer pcount){
-		plugin.setIngameCount(pcount);
+		Bedwars.setIngameCount(pcount);
 	}
 
 	public static ItemStack itemStack(Material mat, Integer amount, String displayname, String Lore){

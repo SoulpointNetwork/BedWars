@@ -28,7 +28,6 @@ import nl.soulpoint.api.mysql.SoulPointMySQL;
  */
 public class Signs {
 	private static SoulPointMySQL connection;
-	public static Bedwars plugin = Bedwars.instance;
 	public static boolean inList = false;
 	 
 	public Signs() {
@@ -43,7 +42,7 @@ public class Signs {
         }
     public static void setId(){
     	try{
-    		connection.executeUpdate("INSERT INTO `BWservers`(ID,NAME,MAP,PLAYERC,MAXP,STATE)\nvalues ('"+plugin.getSignID()+"','"+plugin.getServerName()+"','" + plugin.getMapName() + "', '" +0+"','"+16+"','"+"LOBBY"+"');");
+    		connection.executeUpdate("INSERT INTO `BWservers`(ID,NAME,MAP,PLAYERC,MAXP,STATE)\nvalues ('"+Bedwars.getSignID()+"','"+Bedwars.getServerName()+"','" + Bedwars.getMapName() + "', '" +0+"','"+16+"','"+"LOBBY"+"');");
     	}catch(Exception e){
     		e.printStackTrace();
     	}
@@ -60,7 +59,7 @@ public class Signs {
     
     public static void setStateIngame(){
     	try {
-    		connection.executeUpdate("UPDATE `BWservers` SET STATE="+plugin.getGameState()+" WHERE ID="+plugin.getSignID()+";");
+    		connection.executeUpdate("UPDATE `BWservers` SET STATE="+Bedwars.getGameState()+" WHERE ID="+Bedwars.getSignID()+";");
     } catch (Exception e) {
             e.printStackTrace();
     }
@@ -68,7 +67,7 @@ public class Signs {
 
     	public static void setStateLobby(){
         	try {
-                connection.executeUpdate("UPDATE `BWservers` SET STATE="+"LOBBY"+" WHERE ID="+plugin.getSignID()+";");
+                connection.executeUpdate("UPDATE `BWservers` SET STATE="+"LOBBY"+" WHERE ID="+Bedwars.getSignID()+";");
         } catch (Exception e) {
                 e.printStackTrace();
         }
@@ -76,7 +75,7 @@ public class Signs {
     }
     public static void setPlayerc(int playerc){
     	try {
-            connection.executeUpdate("UPDATE `BWservers` SET PLAYERC="+plugin.getLobbyPCount()+" WHERE ID="+plugin.getSignID()+";");
+            connection.executeUpdate("UPDATE `BWservers` SET PLAYERC="+Bedwars.getLobbyPCount()+" WHERE ID="+Bedwars.getSignID()+";");
     } catch (Exception e) {
             e.printStackTrace();
     }

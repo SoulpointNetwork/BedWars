@@ -42,32 +42,32 @@ public class Teams {
 			if(red < blue && red < yellow && red < green){
 				InGameHandler.addToTeam(p, team);
 			}else{
-				p.sendMessage(Bedwars.instance.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
-				p.sendMessage(Bedwars.instance.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
+				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
+				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
 			}
 		}
 		if(team.equalsIgnoreCase("blue")){
 			if(blue < red && blue < yellow && blue < green){
 				InGameHandler.addToTeam(p, team);
 			}else{
-				p.sendMessage(Bedwars.instance.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
-				p.sendMessage(Bedwars.instance.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
+				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
+				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
 			}
 		}
 		if(team.equalsIgnoreCase("green")){
 			if(green < blue && green < yellow && green < red){
 				InGameHandler.addToTeam(p, team);
 			}else{
-				p.sendMessage(Bedwars.instance.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
-				p.sendMessage(Bedwars.instance.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
+				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
+				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
 			}
 		}
 		if(team.equalsIgnoreCase("yellow")){
 			if(yellow < blue && yellow < red && yellow< green){
 				InGameHandler.addToTeam(p, team);
 			}else{
-				p.sendMessage(Bedwars.instance.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
-				p.sendMessage(Bedwars.instance.getGamePrefix()+ChatColor.RED+"The other teams need to be filled too");
+				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
+				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"The other teams need to be filled too");
 			}
 		}
 	}

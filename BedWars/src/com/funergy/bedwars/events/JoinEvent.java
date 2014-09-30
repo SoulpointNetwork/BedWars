@@ -24,19 +24,18 @@ import com.funergy.bedwars.timers.LobbyTimer;
  *
  */
 public class JoinEvent implements Listener {
-public static Bedwars main = Bedwars.instance;
 
 	@EventHandler
 	public void playerJoinEvent(PlayerJoinEvent e){
-		if(main.getGameState().equalsIgnoreCase("lobby")){
+		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 		  LobbyPlayerHandler.setLobbyPlayerCount(Bukkit.getOnlinePlayers().length);
 		  LobbyPlayerHandler.giveItems(e.getPlayer());
 		  LobbyPlayerHandler.teleportPlayer(e.getPlayer());
-		  if(main.getLobbyPCount() >= 8){
-			  LobbyTimer.start();
+		  if(Bedwars.getLobbyPCount() >= 8){
+			  new LobbyTimer(30).runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 1000);
 		  }
 		  
-		}else if(main.getGameState().equalsIgnoreCase("INGAME")){
+		}else if(Bedwars.getGameState().equalsIgnoreCase("INGAME")){
 			//add them to the spectator handler
 			//teleport them,...
 		

@@ -19,36 +19,35 @@ import com.funergy.bedwars.Bedwars;
  * @author Funergy
  *
  */
-public class LobbyTimer {
-public static Bedwars main = Bedwars.instance;
+public class LobbyTimer extends BukkitRunnable{
+	private int i;
 	
-	public static void start(){
-		Bukkit.broadcastMessage(main.getGamePrefix()+"Lobby timer starting.");
-		new BukkitRunnable(){
-			int i = 40;
-			@Override
-			public void run() {
-				if(main.getGameState().equalsIgnoreCase("LOBBY")){
-				if(i == 1){
-					if(main.getLobbyPCount() >=8){
-						//start game
-						this.cancel();
-						return;
-					}else{
-						Bukkit.broadcastMessage(main.getGamePrefix()+"Not enough players online restarting timer!");
-						i = 30;
-					}
-				}
-				for(Player p : Bukkit.getOnlinePlayers()){
-					p.setLevel(i);
-				}
-				i-=1;
-			}else{
+	public LobbyTimer(int start) {
+		i = start;
+	}
+
+	@Override
+	public void run() {
+		if(Bedwars.getGameState().equalsIgnoreCase("LOBBY")){
+		if (i == 0) {
+			if(Bedwars.getLobbyPCount() >=8){
+				//start game
 				this.cancel();
 				return;
+			}else{
+				Bukkit.broadcastMessage(Bedwars.getGamePrefix()+"Not enough players online restarting timer!");
+				i = 30;
 			}
-			}
-			
-		}.runTaskTimer(main, 0, 20);
+		}
+		if(i < 11){
+			Bukkit.broadcastMessage(Bedwars.getGamePrefix() +"Game starting in "+i);
+		}
+		for(Player p : Bukkit.getOnlinePlayers()){
+			p.setLevel(i);
+		}
+		
+		i--;
 	}
+}
+
 }
