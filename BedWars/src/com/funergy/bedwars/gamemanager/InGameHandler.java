@@ -11,22 +11,50 @@ package com.funergy.bedwars.gamemanager;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import com.funergy.bedwars.Bedwars;
 
 /**
  * @author Funergy
  *
  */
 public class InGameHandler {
+	public static Bedwars plugin = Bedwars.instance;
 	public static HashMap<Player,String> teams = new HashMap<Player,String>();
-	public static ArrayList<Player> players = new ArrayList<Player>();
-	
+	public static ArrayList<Player> red = new ArrayList<Player>();
+	public static ArrayList<Player> blue = new ArrayList<Player>();
+	public static ArrayList<Player> green = new ArrayList<Player>();
+	public static ArrayList<Player> yellow = new ArrayList<Player>();
+
+	public static void loadGameSettings(){
+		plugin.setGameState("lobby");
+	}
 	public static String getTeam(Player p){return teams.get(p);}
 	
-	public static boolean isPlaying(Player p){
-		if(players.contains(p))return true;
-		return false;
+	public static void addToTeam(Player p,String team){
+		teams.put(p, team);
+		if(team.equalsIgnoreCase("red"))red.add(p);
+		if(team.equalsIgnoreCase("blue"))blue.add(p);
+		if(team.equalsIgnoreCase("green"))green.add(p);
+		if(team.equalsIgnoreCase("yellow"))yellow.add(p);
+
+		
 	}
-	
+	public static void removeFromTeam(Player p){
+		teams.remove(p);
+	}
+	public static void startGame(){
+		//Teleport Players to map
+		for(Player p : Bukkit.getOnlinePlayers()){
+			if(!teams.containsKey(p)){
+				Teams.randomTeam(p);
+				p.sendMessage(plugin.getGamePrefix()+"You are in team "+teams.get(p));
+			}
+		}
+		//Start dropping stuff
+		
+	}
 
 }

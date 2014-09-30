@@ -44,35 +44,29 @@ public class Armor{
     */
   
     Item helmet = new Item(Material.LEATHER_HELMET, 1);
-    helmet.setAmount(1);;
+    helmet.setLeatherColor(color);
     helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     helmet.addEnchantment(Enchantment.DURABILITY, 1);
-    helmet.setLeatherColor(color);
 
     Item leggings = new Item(Material.LEATHER_LEGGINGS, 1);
-    leggings.setAmount(1);
+    leggings.setLeatherColor(color);
     leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     leggings.addEnchantment(Enchantment.DURABILITY, 1);
-    leggings.setLeatherColor(color);
 
     Item boots = new Item(Material.LEATHER_BOOTS, 1);
-    boots.setAmount(1);
+    boots.setLeatherColor(color);
     boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     boots.addEnchantment(Enchantment.DURABILITY, 1);
-    boots.setLeatherColor(color);
 
     Item chestplate1 = new Item(Material.CHAINMAIL_CHESTPLATE, 1);
-    chestplate1.setAmount(1);
     chestplate1.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     chestplate1.addEnchantment(Enchantment.DURABILITY, 1);
 
     Item chestplate2 = new Item(Material.CHAINMAIL_CHESTPLATE, 1);
-    chestplate2.setAmount(1);
     chestplate2.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
     chestplate2.addEnchantment(Enchantment.DURABILITY, 1);
 
     Item chestplate3 = new Item(Material.CHAINMAIL_CHESTPLATE, 1);
-    chestplate3.setAmount(1);
     chestplate3.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
     chestplate3.addEnchantment(Enchantment.DURABILITY, 1);
 

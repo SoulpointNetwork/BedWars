@@ -12,7 +12,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.shop.nms.Currency;
 import com.funergy.bedwars.shop.nms.Item;
 import com.funergy.bedwars.shop.nms.Merchant;
