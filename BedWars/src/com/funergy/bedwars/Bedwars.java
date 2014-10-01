@@ -12,13 +12,13 @@ import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.funergy.bedwars.categorychooser.ShopCategories;
 import com.funergy.bedwars.events.InteractEvent;
 import com.funergy.bedwars.events.JoinEvent;
+import com.funergy.bedwars.events.LeaveEvent;
 import com.funergy.bedwars.events.PlaceBlockEvent;
 import com.funergy.bedwars.events.VillagerRightClick;
 import com.funergy.bedwars.gamemanager.InGameHandler;
@@ -57,6 +57,8 @@ public class Bedwars extends JavaPlugin{
 		Bukkit.getPluginManager().registerEvents(new PlaceBlockEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new InteractEvent(), this);
+		Bukkit.getPluginManager().registerEvents(new LeaveEvent(), this);
+
 
 
 		/*Bukkit.getServer().createWorld(new WorldCreator("map"));
