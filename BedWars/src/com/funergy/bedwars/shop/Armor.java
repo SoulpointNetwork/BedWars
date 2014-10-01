@@ -24,14 +24,13 @@ import com.funergy.bedwars.shop.nms.MerchantOffer;
  */
 public class Armor{
 	
-	public static InGameHandler ingame;
   public static void open(Player p)
   {
     Merchant inv = new Merchant();
     inv.setTitle("Armor");
 
     Color color = Color.WHITE;
-     /*String t = ingame.getTeam(p);
+     String t = InGameHandler.getTeam(p);
       if (t.equalsIgnoreCase("green"))
         color = Color.GREEN;
       if (t.equalsIgnoreCase("blue"))
@@ -41,7 +40,7 @@ public class Armor{
       if (t.equalsIgnoreCase("yellow")) {
         color = Color.YELLOW;
       }
-    */
+    
   
     Item helmet = new Item(Material.LEATHER_HELMET, 1);
     helmet.setLeatherColor(color);

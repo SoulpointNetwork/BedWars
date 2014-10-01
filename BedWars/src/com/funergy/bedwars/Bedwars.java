@@ -17,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.funergy.bedwars.categorychooser.ShopCategories;
+import com.funergy.bedwars.events.InteractEvent;
 import com.funergy.bedwars.events.JoinEvent;
 import com.funergy.bedwars.events.PlaceBlockEvent;
 import com.funergy.bedwars.events.VillagerRightClick;
@@ -40,6 +41,7 @@ public class Bedwars extends JavaPlugin{
 
 	 static String gamePrefix = ChatColor.GRAY+"["+ChatColor.RED+"BedWars"+ChatColor.GRAY+"]: "+ChatColor.WHITE;
 	
+	@SuppressWarnings("static-access")
 	public void onEnable() {
 		Signs s = new Signs();
 		s.openConnection();
@@ -54,6 +56,8 @@ public class Bedwars extends JavaPlugin{
 		Bukkit.getPluginManager().registerEvents(new VillagerRightClick(), this);
 		Bukkit.getPluginManager().registerEvents(new PlaceBlockEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
+		Bukkit.getPluginManager().registerEvents(new InteractEvent(), this);
+
 
 		/*Bukkit.getServer().createWorld(new WorldCreator("map"));
 		Bukkit.getWorld("map").setAutoSave(false);

@@ -8,6 +8,7 @@
  ******************************************************************/
 package com.funergy.bedwars.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.funergy.bedwars.Bedwars;
+import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.gamemanager.Teams;
 
 /**
@@ -28,7 +30,23 @@ public class InteractEvent implements Listener {
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 			ItemStack is = e.getPlayer().getItemInHand();
 			if(is.getType() == Material.WOOL){
-			Teams.addToTeam(e.getPlayer(), "red");
+				if(InGameHandler.getTeam(e.getPlayer()) != null){
+					Teams.removePlayerFromTeam(e.getPlayer());
+				}
+			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA+"Blue team")){
+			
+				Teams.addToTeam(e.getPlayer(), "blue");
+				
+			}
+			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED+"Red team")){
+				Teams.addToTeam(e.getPlayer(), "red");
+			}
+			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Yellow team")){
+				Teams.addToTeam(e.getPlayer(), "yellow");
+			}
+		    if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GREEN+"Green team")){
+				Teams.addToTeam(e.getPlayer(), "green");
+			}
 			}
 		}
 	}

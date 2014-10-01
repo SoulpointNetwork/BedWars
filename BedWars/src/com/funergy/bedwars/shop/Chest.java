@@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.shop.nms.Currency;
 import com.funergy.bedwars.shop.nms.Item;
 import com.funergy.bedwars.shop.nms.Merchant;
@@ -32,7 +33,7 @@ public class Chest {
 	    Item enderchest = new Item(Material.ENDER_CHEST, 1);
 	    enderchest.setName(ChatColor.BOLD+"TeamChest [No team]");
 
-	   /**String team = InGameHandler.getTeam(p);
+	   String team = InGameHandler.getTeam(p);
 	    if(team.equalsIgnoreCase("blue")){
 		    enderchest.setName(ChatColor.AQUA+"TeamChest [Blue]");
 	    }else
@@ -48,7 +49,7 @@ public class Chest {
 		    enderchest.setName("TeamChest [No team]");
 
 	    }
-	    **/
+	    
 
 	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 1), chest.getItem()));
 	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 7), enderchest.getItem()));
