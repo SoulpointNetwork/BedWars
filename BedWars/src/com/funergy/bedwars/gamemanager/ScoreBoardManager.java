@@ -39,19 +39,15 @@ public class ScoreBoardManager {
 	}
 	@SuppressWarnings("deprecation")
 	public static void updateSB(){
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard board = manager.getNewScoreboard();
-		 
-		Objective objective = board.registerNewObjective("teams", "dummy");
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		objective.setDisplayName(ChatColor.GOLD+"Teams");
-	    objective.getScore(Bukkit.getOfflinePlayer(ChatColor.RED+"Red")).setScore(InGameHandler.red.size());;
-	    objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN+"Green")).setScore(InGameHandler.green.size());;
-	    objective.getScore(Bukkit.getOfflinePlayer(ChatColor.YELLOW+"Yellow")).setScore(InGameHandler.yellow.size());;
-	    objective.getScore(Bukkit.getOfflinePlayer(ChatColor.AQUA+"Blue")).setScore(InGameHandler.blue.size());;
-
+	
 		for(Player p : Bukkit.getOnlinePlayers()){
-			p.setScoreboard(board);
+			Scoreboard board = p.getScoreboard();
+			Objective objective =  board.getObjective("teams");
+		    objective.getScore(Bukkit.getOfflinePlayer(ChatColor.RED+"Red")).setScore(InGameHandler.red.size());;
+		    objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN+"Green")).setScore(InGameHandler.green.size());;
+		    objective.getScore(Bukkit.getOfflinePlayer(ChatColor.YELLOW+"Yellow")).setScore(InGameHandler.yellow.size());;
+		    objective.getScore(Bukkit.getOfflinePlayer(ChatColor.AQUA+"Blue")).setScore(InGameHandler.blue.size());;
+
 		}
 	}
 

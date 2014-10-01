@@ -49,7 +49,6 @@ public class Teams {
 				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.RED+"RED");
 			}else{
 				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
-				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
 			}
 		}
 		if(team.equalsIgnoreCase("blue")){
@@ -58,7 +57,6 @@ public class Teams {
 				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+"BLUE");
 			}else{
 				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
-				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
 			}
 		}
 		if(team.equalsIgnoreCase("green")){
@@ -68,7 +66,6 @@ public class Teams {
 
 			}else{
 				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
-				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
 			}
 		}
 		if(team.equalsIgnoreCase("yellow")){
@@ -78,7 +75,6 @@ public class Teams {
 
 			}else{
 				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
-				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"The other teams need to be filled too");
 			}
 		}
 		}else{
@@ -117,8 +113,7 @@ public class Teams {
 			InGameHandler.yellow.remove(p);
 			InGameHandler.teams.remove(p);
 		}
-		ScoreBoardManager.updateSB();
-
+		
 	}
 
 }

@@ -133,6 +133,7 @@ public class Bedwars extends JavaPlugin{
 			String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("intro")){
 			  new LobbyTimer(30).runTaskTimer(this, 0, 20);
+			  
 		}
 		return false;
 	}

@@ -33,7 +33,13 @@ public class InGameHandler {
 		}
 	}
 	
-	public static String getTeam(Player p){return teams.get(p);}
+	public static String getTeam(Player p){
+		if(teams.containsKey(p)){
+		return teams.get(p);
+		}else{
+			return null;
+		}
+		}
 	
 	public static void addToTeam(Player p,String team){
 		teams.put(p, team);

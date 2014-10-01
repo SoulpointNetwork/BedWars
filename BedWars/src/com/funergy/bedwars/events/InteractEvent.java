@@ -8,6 +8,7 @@
  ******************************************************************/
 package com.funergy.bedwars.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -30,47 +31,39 @@ public class InteractEvent implements Listener {
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 			ItemStack is = e.getPlayer().getItemInHand();
 			if(is.getType() == Material.WOOL){
-				if(InGameHandler.getTeam(e.getPlayer()) != null){
-					Teams.removePlayerFromTeam(e.getPlayer());
-				}
+				
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA+"Blue team")){
-				if(InGameHandler.getTeam(e.getPlayer()) != null){
-				if(InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("blue")){
-					e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You are already in that team");
+				
+					Teams.addToTeam(e.getPlayer(), "blue");
 					return;
-				}
-				}
-				Teams.addToTeam(e.getPlayer(), "blue");
+
+			
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED+"Red team")){
-				if(InGameHandler.getTeam(e.getPlayer()) != null){
-				if(InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("red")){
-					e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You are already in that team");
-					return;
-				}
-				}
 				Teams.addToTeam(e.getPlayer(), "red");
+				return;
+
+				
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Yellow team")){
-				if(InGameHandler.getTeam(e.getPlayer()) != null){
-				if(InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("yellow")){
-					e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You are already in that team");
+				
+					Teams.addToTeam(e.getPlayer(), "yellow");
 					return;
-				}
-				}
-				Teams.addToTeam(e.getPlayer(), "yellow");
+
+				
 			}
 		    if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GREEN+"Green team")){
-				if(InGameHandler.getTeam(e.getPlayer()) != null){
-		    	if(InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("green")){
-					e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You are already in that team");
+				
+				
+					Teams.addToTeam(e.getPlayer(), "green");
 					return;
+
 				}
-				}
-				Teams.addToTeam(e.getPlayer(), "green");
+		    if(InGameHandler.getTeam(e.getPlayer()) != null){
+				Teams.removePlayerFromTeam(e.getPlayer());
 			}
 			}
-		}
+			}
 	}
 
 }
