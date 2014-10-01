@@ -25,10 +25,10 @@ public class LeaveEvent implements Listener{
 	@EventHandler
 	public void onLeaveEvent(PlayerQuitEvent e){
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
+		    e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
+			e.getPlayer().getInventory().clear();
 			if(InGameHandler.getTeam(e.getPlayer())!=null){
 			Teams.removePlayerFromTeam(e.getPlayer());
-			e.getPlayer().getInventory().clear();
-		    e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
 			}
 		}
 	}
