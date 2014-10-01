@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.gamemanager.LobbyPlayerHandler;
+import com.funergy.bedwars.gamemanager.ScoreBoardManager;
 import com.funergy.bedwars.timers.LobbyTimer;
 
 
@@ -33,7 +34,11 @@ public class JoinEvent implements Listener {
 		  LobbyPlayerHandler.setLobbyPlayerCount(Bukkit.getOnlinePlayers().length);
 		  LobbyPlayerHandler.giveItems(e.getPlayer());
 		  LobbyPlayerHandler.teleportPlayer(e.getPlayer());
+		  e.getPlayer().setFoodLevel(20);
+		  e.getPlayer().setHealth(20);
 		  e.setJoinMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+e.getPlayer().getName()+ChatColor.WHITE+" Has joined the game ("+Bedwars.getLobbyPCount()+"/16)");
+		  ScoreBoardManager.openScoreboard(e.getPlayer());
+		  
 		  if(Bedwars.getLobbyPCount() >= 8){
 				int red = InGameHandler.red.size();
 				int blue = InGameHandler.blue.size();

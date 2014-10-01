@@ -32,6 +32,7 @@ public class InGameHandler {
 		System.out.println("[BedWars] Setting Gamestate to lobby");
 		}
 	}
+	
 	public static String getTeam(Player p){return teams.get(p);}
 	
 	public static void addToTeam(Player p,String team){
@@ -40,7 +41,7 @@ public class InGameHandler {
 		if(team.equalsIgnoreCase("blue"))blue.add(p);
 		if(team.equalsIgnoreCase("green"))green.add(p);
 		if(team.equalsIgnoreCase("yellow"))yellow.add(p);
-
+		
 		
 	}
 	public static void removeFromTeam(Player p){
@@ -57,5 +58,6 @@ public class InGameHandler {
 		//Start dropping stuff
 		
 	}
+	
 
 }

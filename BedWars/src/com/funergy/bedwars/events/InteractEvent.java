@@ -34,17 +34,31 @@ public class InteractEvent implements Listener {
 					Teams.removePlayerFromTeam(e.getPlayer());
 				}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA+"Blue team")){
-			
+				if(InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("blue")){
+					e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You are already in that team");
+					return;
+				}
 				Teams.addToTeam(e.getPlayer(), "blue");
-				
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED+"Red team")){
+				if(InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("red")){
+					e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You are already in that team");
+					return;
+				}
 				Teams.addToTeam(e.getPlayer(), "red");
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Yellow team")){
+				if(InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("yellow")){
+					e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You are already in that team");
+					return;
+				}
 				Teams.addToTeam(e.getPlayer(), "yellow");
 			}
 		    if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GREEN+"Green team")){
+		    	if(InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("green")){
+					e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You are already in that team");
+					return;
+				}
 				Teams.addToTeam(e.getPlayer(), "green");
 			}
 			}

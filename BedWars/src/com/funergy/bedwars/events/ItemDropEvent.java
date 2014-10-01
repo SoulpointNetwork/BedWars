@@ -10,7 +10,7 @@ package com.funergy.bedwars.events;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 
 import com.funergy.bedwars.Bedwars;
 
@@ -18,15 +18,14 @@ import com.funergy.bedwars.Bedwars;
  * @author Funergy
  *
  */
-public class PlaceBlockEvent implements Listener {
+public class ItemDropEvent implements Listener {
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void onBlockPlaceEvent(BlockPlaceEvent e){
+	public void onItemDropEvent(PlayerDropItemEvent e){
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 			e.setCancelled(true);
-			e.getPlayer().updateInventory();
 		}
 	}
+	
 
 }

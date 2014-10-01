@@ -8,9 +8,10 @@
  ******************************************************************/
 package com.funergy.bedwars.events;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 import com.funergy.bedwars.Bedwars;
 
@@ -18,15 +19,14 @@ import com.funergy.bedwars.Bedwars;
  * @author Funergy
  *
  */
-public class PlaceBlockEvent implements Listener {
-	
-	@SuppressWarnings("deprecation")
+public class FoodLevelChange implements Listener{
 	@EventHandler
-	public void onBlockPlaceEvent(BlockPlaceEvent e){
+	public void onFoodLevelChangeEvent(FoodLevelChangeEvent e){
+	if(e.getEntity() instanceof Player){
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 			e.setCancelled(true);
-			e.getPlayer().updateInventory();
 		}
+	}
 	}
 
 }

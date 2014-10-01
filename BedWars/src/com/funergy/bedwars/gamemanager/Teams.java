@@ -25,13 +25,17 @@ public class Teams {
 		}
 		if(InGameHandler.green.size() !=4){
 			InGameHandler.addToTeam(p, "green");
+
 		}
 		if(InGameHandler.yellow.size() !=4){
 			InGameHandler.addToTeam(p, "yellow");
+
 		}
 		if(InGameHandler.blue.size() !=4){
 			InGameHandler.addToTeam(p, "blue");
+
 		}
+		ScoreBoardManager.updateSB();
 	}
 	public static void addToTeam(Player p,String team){
 		int red = InGameHandler.red.size();
@@ -51,7 +55,7 @@ public class Teams {
 		if(team.equalsIgnoreCase("blue")){
 			if(blue <= red && blue <=yellow && blue <= green){
 				InGameHandler.addToTeam(p, team);
-				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+"AQUA");
+				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+"BLUE");
 			}else{
 				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
 				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"The other teams needs to be filled too");
@@ -92,6 +96,8 @@ public class Teams {
 				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.RED+team.toUpperCase());
 				}
 		}
+		ScoreBoardManager.updateSB();
+
 	}
 	public static void removePlayerFromTeam(Player p){
 		String team = InGameHandler.getTeam(p);
@@ -111,6 +117,8 @@ public class Teams {
 			InGameHandler.yellow.remove(p);
 			InGameHandler.teams.remove(p);
 		}
+		ScoreBoardManager.updateSB();
+
 	}
 
 }

@@ -12,17 +12,30 @@ import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 import com.funergy.bedwars.categorychooser.ShopCategories;
+import com.funergy.bedwars.events.BlockBreakevent;
+import com.funergy.bedwars.events.FoodLevelChange;
 import com.funergy.bedwars.events.InteractEvent;
+import com.funergy.bedwars.events.ItemDropEvent;
 import com.funergy.bedwars.events.JoinEvent;
 import com.funergy.bedwars.events.LeaveEvent;
 import com.funergy.bedwars.events.PlaceBlockEvent;
 import com.funergy.bedwars.events.VillagerRightClick;
 import com.funergy.bedwars.gamemanager.InGameHandler;
+import com.funergy.bedwars.gamemanager.ScoreBoardManager;
 import com.funergy.bedwars.mysql.Signs;
+import com.funergy.bedwars.timers.LobbyTimer;
 
 /**
  * @author Funergy
@@ -58,6 +71,9 @@ public class Bedwars extends JavaPlugin{
 		Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new InteractEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new LeaveEvent(), this);
+		Bukkit.getPluginManager().registerEvents(new FoodLevelChange(), this);
+		Bukkit.getPluginManager().registerEvents(new ItemDropEvent(), this);
+		Bukkit.getPluginManager().registerEvents(new BlockBreakevent(), this);
 
 
 
@@ -111,6 +127,14 @@ public class Bedwars extends JavaPlugin{
 			}
 			
 		}.runTaskTimer(this, 0, 10);
+	}
+	
+	public boolean onCommand(CommandSender sender, Command cmd,
+			String label, String[] args) {
+		if(cmd.getName().equalsIgnoreCase("intro")){
+			  new LobbyTimer(30).runTaskTimer(this, 0, 20);
+		}
+		return false;
 	}
 	
 	
