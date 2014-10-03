@@ -32,10 +32,10 @@ public class Food {
 	    Item cake = new Item(Material.CAKE, 1);
 	    Item gapple = new Item(Material.GOLDEN_APPLE, 1);
 
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 1), apple.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 2), meat.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 1), cake.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 2), gapple.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 1), apple.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 2), meat.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 1), cake.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 2), gapple.getItem()));
 
 	    inv.setCustomer(p);
 	    inv.openTrading(p);

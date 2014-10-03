@@ -13,11 +13,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.funergy.bedwars.Bedwars;
+import com.funergy.bedwars.gamemanager.ChestHandler;
 import com.funergy.bedwars.gamemanager.InGameHandler;
+import com.funergy.bedwars.gamemanager.ScoreBoardManager;
 import com.funergy.bedwars.gamemanager.Teams;
 
 /**
@@ -33,43 +36,67 @@ public class InteractEvent implements Listener {
 			if(is.getType() == Material.WOOL){
 				
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA+"Blue team")){
-				if(InGameHandler.getTeam(e.getPlayer())!=null && !InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("blue")){
+				if(InGameHandler.getTeam(e.getPlayer())!=null){
 					Teams.removePlayerFromTeam(e.getPlayer());
 				}
+				
 					Teams.addToTeam(e.getPlayer(), "blue");
-					
+					ScoreBoardManager.updateSB();
+
 
 			
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED+"Red team")){
-				if(InGameHandler.getTeam(e.getPlayer())!=null && !InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("red")){
+				if(InGameHandler.getTeam(e.getPlayer())!=null ){
 					Teams.removePlayerFromTeam(e.getPlayer());
 				}
+			
 				Teams.addToTeam(e.getPlayer(), "red");
+				ScoreBoardManager.updateSB();
 
 				
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Yellow team")){
-				if(InGameHandler.getTeam(e.getPlayer())!=null && !InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("yellow")){
+				if(InGameHandler.getTeam(e.getPlayer())!=null){
 					Teams.removePlayerFromTeam(e.getPlayer());
 				}
+			
 				
 					Teams.addToTeam(e.getPlayer(), "yellow");
+					ScoreBoardManager.updateSB();
 
 				
 			}
 		    if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GREEN+"Green team")){
-		    	if(InGameHandler.getTeam(e.getPlayer())!=null && !InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("green")){
+		    	if(InGameHandler.getTeam(e.getPlayer())!=null){
 					Teams.removePlayerFromTeam(e.getPlayer());
 				}
+		    
 				
 				
 					Teams.addToTeam(e.getPlayer(), "green");
+					ScoreBoardManager.updateSB();
 
 				}
 		    
 			}
 			}
+		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
+			if(e.getClickedBlock().getType()==Material.CHEST){
+			if(ChestHandler.isChest(e.getClickedBlock().getLocation())){
+				if(!ChestHandler.getTeamFromChest(e.getClickedBlock().getLocation()).equalsIgnoreCase(InGameHandler.getTeam(e.getPlayer()))){
+					e.setCancelled(true);
+				}
+
+			}
+			}
+			if(e.getClickedBlock().getType() ==Material.BED_BLOCK){
+				if(e.getAction() == Action.RIGHT_CLICK_BLOCK){
+				e.setCancelled(true);
+				}
+			}
+		
+		}
 	}
 
 }

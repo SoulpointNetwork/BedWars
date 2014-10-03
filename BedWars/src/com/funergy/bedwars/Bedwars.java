@@ -8,8 +8,6 @@
  ******************************************************************/
 package com.funergy.bedwars;
 
-import java.sql.SQLException;
-
 import nl.soulpoint.api.mysql.SoulPointMySQL;
 
 import org.bukkit.Bukkit;
@@ -19,7 +17,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-
 import com.funergy.bedwars.categorychooser.ShopCategories;
 import com.funergy.bedwars.events.BlockBreakevent;
 import com.funergy.bedwars.events.FoodLevelChange;
@@ -28,10 +25,12 @@ import com.funergy.bedwars.events.ItemDropEvent;
 import com.funergy.bedwars.events.JoinEvent;
 import com.funergy.bedwars.events.LeaveEvent;
 import com.funergy.bedwars.events.PlaceBlockEvent;
+import com.funergy.bedwars.events.PlayerDeathHandler;
+import com.funergy.bedwars.events.TnTExplosionEvent;
 import com.funergy.bedwars.events.VillagerRightClick;
+import com.funergy.bedwars.gamemanager.BedHandler;
 import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.mysql.Signs;
-import com.funergy.bedwars.timers.LobbyTimer;
 
 /**
  * @author Funergy
@@ -61,6 +60,8 @@ public class Bedwars extends JavaPlugin{
 		Bukkit.getPluginManager().registerEvents(new FoodLevelChange(), this);
 		Bukkit.getPluginManager().registerEvents(new ItemDropEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new BlockBreakevent(), this);
+		Bukkit.getPluginManager().registerEvents(new PlayerDeathHandler(), this);
+		Bukkit.getPluginManager().registerEvents(new TnTExplosionEvent(), this);
 
 
 
@@ -124,9 +125,17 @@ public class Bedwars extends JavaPlugin{
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("intro")){
-			  new LobbyTimer(30).runTaskTimer(this, 0, 20);
+			  InGameHandler.startGame();
 			  
 		}
+		if(cmd.getName().equalsIgnoreCase("red")){
+			if(BedHandler.hasBed("red")){
+			sender.sendMessage("true");
+			}else{
+				sender.sendMessage("false");
+			}
+		}
+		
 		return false;
 	}
 	

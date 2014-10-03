@@ -39,9 +39,9 @@ public class Pickaxe {
 	    iron.addEnchantment(Enchantment.DIG_SPEED, 1);
 	    iron.addEnchantment(Enchantment.DURABILITY, 1);
 
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 10), wood.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 2), stone.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 1), iron.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 10), wood.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 2), stone.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 1), iron.getItem()));
 
 	    inv.setCustomer(p);
 	    inv.openTrading(p);

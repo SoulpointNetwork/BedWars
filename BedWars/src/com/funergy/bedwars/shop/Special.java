@@ -33,14 +33,14 @@ public class Special {
 	    Item tnt = new Item(Material.TNT, 1);
 	    Item ender = new Item(Material.ENDER_PEARL, 1);
 
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 1), ladder
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 1), ladder
 	      .getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 20), web.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 5), fishing
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 20), web.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 5), fishing
 	      .getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 4), flint.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 3), tnt.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 10), ender.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 4), flint.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 3), tnt.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 10), ender.getItem()));
 
 	    inv.setCustomer(p);
 	    inv.openTrading(p);

@@ -51,8 +51,8 @@ public class Chest {
 	    }
 	    
 
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 1), chest.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 7), enderchest.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 1), chest.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 7), enderchest.getItem()));
 
 	    inv.setCustomer(p);
 	    inv.openTrading(p);

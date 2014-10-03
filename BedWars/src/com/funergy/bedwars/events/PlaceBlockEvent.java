@@ -18,6 +18,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.util.Vector;
 
 import com.funergy.bedwars.Bedwars;
+import com.funergy.bedwars.gamemanager.ChestHandler;
+import com.funergy.bedwars.gamemanager.InGameHandler;
 
 /**
  * @author Funergy
@@ -31,9 +33,12 @@ public class PlaceBlockEvent implements Listener {
 		materials.add(Material.GLOWSTONE);
 		materials.add(Material.IRON_BLOCK);
 		materials.add(Material.FIRE);
+		materials.add(Material.CAKE_BLOCK);
 		materials.add(Material.LADDER);
 		materials.add(Material.WEB);
 		materials.add(Material.TNT);
+		materials.add(Material.CHEST);
+		materials.add(Material.ENDER_CHEST);
 
 	}
 	@SuppressWarnings("deprecation")
@@ -52,6 +57,10 @@ public class PlaceBlockEvent implements Listener {
 				TNTPrimed tnt = e.getPlayer().getWorld().spawn(e.getBlockPlaced().getLocation(), TNTPrimed.class);
 				tnt.setFuseTicks(60);
 				tnt.setVelocity(new Vector(0, 0.3, 0));
+			}
+			if(e.getBlock().getType() == Material.ENDER_CHEST){
+				e.getBlock().setType(Material.CHEST);
+				ChestHandler.addChest(e.getBlock().getLocation(), InGameHandler.getTeam(e.getPlayer()));
 			}
 		}
 	

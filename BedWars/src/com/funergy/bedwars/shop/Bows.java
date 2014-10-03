@@ -40,10 +40,10 @@ public class Bows {
 
 	    Item arrow = new Item(Material.ARROW, 1);
 
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 3), bow1.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 7), bow2.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 15), bow3.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 1), arrow.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 3), bow1.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 7), bow2.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 15), bow3.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 1), arrow.getItem()));
 
 	    inv.setCustomer(p);
 	    inv.openTrading(p);

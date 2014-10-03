@@ -51,12 +51,12 @@ public class Weapons {
 	    iron2.addEnchantment(Enchantment.DURABILITY, 2);
 	    iron2.addEnchantment(Enchantment.KNOCKBACK, 2);
 
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 10), knockback.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 30), knockback2.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 1), gold.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 3), gold2.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 3), iron.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 6), iron2.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 10), knockback.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 30), knockback2.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 1), gold.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 3), gold2.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 3), iron.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 6), iron2.getItem()));
 
 	    
 	    inv.setCustomer(p);

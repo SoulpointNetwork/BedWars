@@ -36,12 +36,12 @@ public class Blocks {
 	    glowstone.setAmount(4);
 
 	    
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 1), sandstone.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 5), endstone
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 1), sandstone.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 5), endstone
 	      .getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 20), glowstone
+	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 20), glowstone
 	  	      .getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 3), ironblock
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 3), ironblock
 	      .getItem()));
 	    
 

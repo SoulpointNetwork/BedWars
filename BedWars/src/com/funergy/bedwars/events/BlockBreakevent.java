@@ -10,12 +10,19 @@ package com.funergy.bedwars.events;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.material.Bed;
 
 import com.funergy.bedwars.Bedwars;
+import com.funergy.bedwars.gamemanager.BedHandler;
+import com.funergy.bedwars.gamemanager.ChestHandler;
+import com.funergy.bedwars.gamemanager.InGameHandler;
 
 /**
  * @author Funergy
@@ -33,17 +40,43 @@ public class BlockBreakevent implements Listener {
 	materials.add(Material.LADDER);
 	materials.add(Material.WEB);
 	materials.add(Material.TNT);
+	materials.add(Material.CHEST);
+	materials.add(Material.ENDER_CHEST);
+	materials.add(Material.BED_BLOCK);
+	materials.add(Material.BED);
+	materials.add(Material.CAKE_BLOCK);
     }
     
-	@EventHandler
+	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onBlockBreak(BlockBreakEvent e){
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 			e.setCancelled(true);
 		}
 		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
+			if(e.getBlock().getType() == Material.BED_BLOCK){
+				Location b = e.getBlock().getLocation();
+				if(BedHandler.isTeamBed(InGameHandler.getTeam(e.getPlayer()).toLowerCase(), b)){
+					e.setCancelled(true);
+					return;
+				}				
+				Bukkit.broadcastMessage(Bedwars.getGamePrefix()+"The bed from team "+BedHandler.getTeamFromBed(b)+" has been broken!");
+				BedHandler.removeBed(BedHandler.getTeamFromBed(b));
+				e.getBlock().getDrops().clear();
+				
+			}
+			if(e.getBlock().getType() == Material.CHEST){
+				if(ChestHandler.isChest(e.getBlock().getLocation())){
+				if(ChestHandler.getTeamFromChest(e.getBlock().getLocation()).equalsIgnoreCase(InGameHandler.getTeam(e.getPlayer()))){
+				ChestHandler.removeChest(e.getBlock().getLocation());
+				}else{
+					e.setCancelled(true);
+				}
+				}
+			}
 			if(!materials.contains(e.getBlock().getType())){
 				e.setCancelled(true);
 			}
+			
 		}
 	}
 

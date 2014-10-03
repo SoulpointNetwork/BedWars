@@ -20,6 +20,9 @@ import org.bukkit.entity.Player;
 import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.events.BlockBreakevent;
 import com.funergy.bedwars.events.PlaceBlockEvent;
+import com.funergy.bedwars.gamemanager.itemdrop.Diamond;
+import com.funergy.bedwars.gamemanager.itemdrop.Gold;
+import com.funergy.bedwars.gamemanager.itemdrop.Quartz;
 import com.funergy.bedwars.mysql.Signs;
 
 /**
@@ -35,6 +38,7 @@ public class InGameHandler {
 
 	public static void loadGameSettings(){
 		Bedwars.setGameState("lobby");{
+		BedHandler.setupBed();
 		PlaceBlockEvent.setup();
 		BlockBreakevent.setup();
 		}
@@ -88,6 +92,9 @@ public class InGameHandler {
 		for(Player p:yellow){
 			p.teleport(new Location(Bukkit.getWorld("world"),-173,25,-230));
 		}
+		new Quartz().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 100, 30);
+		new Gold().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 100, 320);
+		new Diamond().runTaskTimer(Bedwars.getPlugin(Bedwars.class),100, 400);
 		//Start dropping stuff
 		
 	}

@@ -38,10 +38,10 @@ public class Potions {
 	    Item strength = new Item(Material.POTION, 1);
 	    strength.setPotion(8201);
 
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 3), heal.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 6), heal2.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getIron(p, 7), speed.getItem()));
-	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 8), strength
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 3), heal.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 6), heal2.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getGold(p, 7), speed.getItem()));
+	    inv.addOffer(new MerchantOffer(Currency.getDiamond(p, 8), strength
 	      .getItem()));
 
 	    inv.setCustomer(p);

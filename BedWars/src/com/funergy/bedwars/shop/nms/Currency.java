@@ -19,27 +19,27 @@ import org.bukkit.inventory.ItemStack;
  */
 	public class Currency
 	{
-	  public static ItemStack getGold(Player p, int amount)
+	  public static ItemStack getQuartz(Player p, int amount)
 	  {
+	    Item i = new Item(Material.QUARTZ, amount);
+
+	    i.setName("Quartz");
+
+	    return i.getItem();
+	  }
+
+	  public static ItemStack getGold(Player p, int amount) {
 	    Item i = new Item(Material.GOLD_INGOT, amount);
 
-	    i.setName(ChatColor.GOLD+"gold");
+	    i.setName(ChatColor.GOLD+"Gold");
 
 	    return i.getItem();
 	  }
 
-	  public static ItemStack getIron(Player p, int amount) {
-	    Item i = new Item(Material.IRON_INGOT, amount);
+	  public static ItemStack getDiamond(Player p, int amount) {
+	    Item i = new Item(Material.DIAMOND, amount);
 
-	    i.setName(ChatColor.WHITE+"iron");
-
-	    return i.getItem();
-	  }
-
-	  public static ItemStack getBronze(Player p, int amount) {
-	    Item i = new Item(Material.CLAY_BRICK, amount);
-
-	    i.setName(ChatColor.DARK_RED+"bronze");
+	    i.setName(ChatColor.AQUA+"Diamond");
 
 	    return i.getItem();
 	  }

@@ -69,12 +69,12 @@ public class Armor{
     chestplate3.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
     chestplate3.addEnchantment(Enchantment.DURABILITY, 1);
 
-    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 5), helmet.getItem()));
-    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 10), leggings.getItem()));
-    inv.addOffer(new MerchantOffer(Currency.getBronze(p, 5), boots.getItem()));
-    inv.addOffer(new MerchantOffer(Currency.getIron(p, 15), chestplate1.getItem()));
-    inv.addOffer(new MerchantOffer(Currency.getIron(p, 20), chestplate2.getItem()));
-    inv.addOffer(new MerchantOffer(Currency.getIron(p, 25), chestplate3.getItem()));
+    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 5), helmet.getItem()));
+    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 10), leggings.getItem()));
+    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 5), boots.getItem()));
+    inv.addOffer(new MerchantOffer(Currency.getGold(p, 15), chestplate1.getItem()));
+    inv.addOffer(new MerchantOffer(Currency.getGold(p, 20), chestplate2.getItem()));
+    inv.addOffer(new MerchantOffer(Currency.getGold(p, 25), chestplate3.getItem()));
 
     inv.setCustomer(p);
     inv.openTrading(p);
