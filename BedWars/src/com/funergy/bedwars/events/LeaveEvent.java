@@ -25,22 +25,58 @@ import com.funergy.bedwars.gamemanager.Teams;
 public class LeaveEvent implements Listener{
 	@EventHandler
 	public void onLeaveEvent(PlayerQuitEvent e){
+		e.setQuitMessage(null);
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 		    e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
 			e.getPlayer().getInventory().clear();
-			if(InGameHandler.getTeam(e.getPlayer())!=null){
+			if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
 			Teams.removePlayerFromTeam(e.getPlayer());
+			if(InGameHandler.blue.size() == 0 && InGameHandler.green.size() == 0 && InGameHandler.yellow.size() == 0){
+				InGameHandler.redWins();
 			}
+			if(InGameHandler.green.size() == 0 && InGameHandler.red.size() == 0 && InGameHandler.yellow.size()==  0){
+				InGameHandler.blueWins();
+			}
+			if(InGameHandler.blue.size() == 0 && InGameHandler.yellow.size() == 0 && InGameHandler.red.size() == 0){
+				InGameHandler.greenWins();
+			}
+			if(InGameHandler.green.size() == 0 && InGameHandler.red.size() == 0 && InGameHandler.blue.size() == 0){
+				InGameHandler.yellowWins();
+			}
+			Teams.removePlayerFromTeam(e.getPlayer());
+			e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
+			e.getPlayer().getInventory().clear();
+
+			
+		}
 		}
 	}
 	@EventHandler
 	public void onKickEvent(PlayerKickEvent e){
+		e.setLeaveMessage(null);
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 		    e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
 			e.getPlayer().getInventory().clear();
-			if(InGameHandler.getTeam(e.getPlayer())!=null){
+			if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
 			Teams.removePlayerFromTeam(e.getPlayer());
+			if(InGameHandler.blue.size() == 0 && InGameHandler.green.size() == 0 && InGameHandler.yellow.size() == 0){
+				InGameHandler.redWins();
 			}
+			if(InGameHandler.green.size() == 0 && InGameHandler.red.size() == 0 && InGameHandler.yellow.size()==  0){
+				InGameHandler.blueWins();
+			}
+			if(InGameHandler.blue.size() == 0 && InGameHandler.yellow.size() == 0 && InGameHandler.red.size() == 0){
+				InGameHandler.greenWins();
+			}
+			if(InGameHandler.green.size() == 0 && InGameHandler.red.size() == 0 && InGameHandler.blue.size() == 0){
+				InGameHandler.yellowWins();
+			}
+			Teams.removePlayerFromTeam(e.getPlayer());
+			e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
+			e.getPlayer().getInventory().clear();
+
+			
+		}
 		}
 	}
 

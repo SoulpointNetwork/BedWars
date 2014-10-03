@@ -129,12 +129,8 @@ public class Bedwars extends JavaPlugin{
 			  InGameHandler.startGame();
 			  
 		}
-		if(cmd.getName().equalsIgnoreCase("red")){
-			if(BedHandler.hasBed("red")){
-			sender.sendMessage("true");
-			}else{
-				sender.sendMessage("false");
-			}
+		if(cmd.getName().equalsIgnoreCase("win")){
+			InGameHandler.yellowWins();
 		}
 		
 		return false;

@@ -34,6 +34,7 @@ public class Signs {
         connection = new SoulPointMySQL();
     }
 	public static void openConnection(){
+        connection = new SoulPointMySQL();
         connection.connect();
 	}
 	
