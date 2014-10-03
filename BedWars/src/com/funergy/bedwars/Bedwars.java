@@ -20,6 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.funergy.bedwars.categorychooser.ShopCategories;
 import com.funergy.bedwars.events.BlockBreakevent;
 import com.funergy.bedwars.events.FoodLevelChange;
+import com.funergy.bedwars.events.HitEvent;
 import com.funergy.bedwars.events.InteractEvent;
 import com.funergy.bedwars.events.ItemDropEvent;
 import com.funergy.bedwars.events.JoinEvent;
@@ -62,7 +63,7 @@ public class Bedwars extends JavaPlugin{
 		Bukkit.getPluginManager().registerEvents(new BlockBreakevent(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerDeathHandler(), this);
 		Bukkit.getPluginManager().registerEvents(new TnTExplosionEvent(), this);
-
+		Bukkit.getPluginManager().registerEvents(new HitEvent(), this);
 
 
 		/*Bukkit.getServer().createWorld(new WorldCreator("map"));

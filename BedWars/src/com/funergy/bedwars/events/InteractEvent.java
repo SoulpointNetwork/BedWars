@@ -8,7 +8,6 @@
  ******************************************************************/
 package com.funergy.bedwars.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -20,7 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.ChestHandler;
 import com.funergy.bedwars.gamemanager.InGameHandler;
-import com.funergy.bedwars.gamemanager.ScoreBoardManager;
 import com.funergy.bedwars.gamemanager.Teams;
 
 /**
@@ -36,53 +34,40 @@ public class InteractEvent implements Listener {
 			if(is.getType() == Material.WOOL){
 				
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA+"Blue team")){
-				if(InGameHandler.getTeam(e.getPlayer())!=null){
-					Teams.removePlayerFromTeam(e.getPlayer());
-				}
+				
 				
 					Teams.addToTeam(e.getPlayer(), "blue");
-					ScoreBoardManager.updateSB();
 
 
 			
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED+"Red team")){
-				if(InGameHandler.getTeam(e.getPlayer())!=null ){
-					Teams.removePlayerFromTeam(e.getPlayer());
-				}
+				
 			
 				Teams.addToTeam(e.getPlayer(), "red");
-				ScoreBoardManager.updateSB();
 
 				
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Yellow team")){
-				if(InGameHandler.getTeam(e.getPlayer())!=null){
-					Teams.removePlayerFromTeam(e.getPlayer());
-				}
-			
+				
 				
 					Teams.addToTeam(e.getPlayer(), "yellow");
-					ScoreBoardManager.updateSB();
 
 				
 			}
 		    if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GREEN+"Green team")){
-		    	if(InGameHandler.getTeam(e.getPlayer())!=null){
-					Teams.removePlayerFromTeam(e.getPlayer());
-				}
+		    	
 		    
 				
 				
 					Teams.addToTeam(e.getPlayer(), "green");
-					ScoreBoardManager.updateSB();
 
 				}
 		    
 			}
 			}
 		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
-			if(e.getClickedBlock().getType()==Material.CHEST){
+			if(e.getClickedBlock().getType() == Material.CHEST){
 			if(ChestHandler.isChest(e.getClickedBlock().getLocation())){
 				if(!ChestHandler.getTeamFromChest(e.getClickedBlock().getLocation()).equalsIgnoreCase(InGameHandler.getTeam(e.getPlayer()))){
 					e.setCancelled(true);

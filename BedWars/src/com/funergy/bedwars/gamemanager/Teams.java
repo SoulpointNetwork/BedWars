@@ -53,6 +53,9 @@ public class Teams {
 		if(InGameHandler.teams.size() != 0){
 		if(team.equalsIgnoreCase("red")){
 			if(red <= blue && red <= yellow && red <= green){
+				if(InGameHandler.getTeam(p)!=null){
+					Teams.removePlayerFromTeam(p);
+				}
 				InGameHandler.addToTeam(p, team);
 				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.RED+"RED");
 			}else{
@@ -61,6 +64,9 @@ public class Teams {
 		}
 		if(team.equalsIgnoreCase("blue")){
 			if(blue <= red && blue <=yellow && blue <= green){
+				if(InGameHandler.getTeam(p)!=null){
+					Teams.removePlayerFromTeam(p);
+				}
 				InGameHandler.addToTeam(p, team);
 				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+"BLUE");
 			}else{
@@ -69,6 +75,9 @@ public class Teams {
 		}
 		if(team.equalsIgnoreCase("green")){
 			if(green <= blue && green <= yellow && green <= red){
+				if(InGameHandler.getTeam(p)!=null){
+					Teams.removePlayerFromTeam(p);
+				}
 				InGameHandler.addToTeam(p, team);
 				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.GREEN+"GREEN");
 
@@ -77,8 +86,12 @@ public class Teams {
 			}
 		}
 		if(team.equalsIgnoreCase("yellow")){
-			if(yellow <= blue && yellow <= red && yellow<= green){
+			if(yellow <= blue && yellow <= red && yellow <= green){
+				if(InGameHandler.getTeam(p)!=null){
+					Teams.removePlayerFromTeam(p);
+				}
 				InGameHandler.addToTeam(p, team);
+				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.YELLOW+"YELLOW");
 
 			}else{
 				p.sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"That team is not joinable!");
@@ -115,6 +128,7 @@ public class Teams {
 		
 			InGameHandler.yellow.remove(p);
 			InGameHandler.teams.remove(p);
+			ScoreBoardManager.updateSB();
 
 		
 	}

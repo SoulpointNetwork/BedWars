@@ -10,6 +10,7 @@ package com.funergy.bedwars.events;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -24,6 +25,16 @@ import com.funergy.bedwars.gamemanager.Teams;
 public class LeaveEvent implements Listener{
 	@EventHandler
 	public void onLeaveEvent(PlayerQuitEvent e){
+		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
+		    e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
+			e.getPlayer().getInventory().clear();
+			if(InGameHandler.getTeam(e.getPlayer())!=null){
+			Teams.removePlayerFromTeam(e.getPlayer());
+			}
+		}
+	}
+	@EventHandler
+	public void onKickEvent(PlayerKickEvent e){
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 		    e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
 			e.getPlayer().getInventory().clear();

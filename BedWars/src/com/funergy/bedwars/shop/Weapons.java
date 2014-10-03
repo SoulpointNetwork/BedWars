@@ -31,7 +31,7 @@ public class Weapons {
 	    knockback.addEnchantment(Enchantment.KNOCKBACK, 1);
 	    
 	    Item knockback2 =  new Item(Material.STICK, 1);
-	    knockback.addEnchantment(Enchantment.KNOCKBACK, 2);
+	    knockback2.addEnchantment(Enchantment.KNOCKBACK, 2);
 	    
 	    Item gold = new Item(Material.GOLD_SWORD, 1);
 	    gold.addEnchantment(Enchantment.DAMAGE_ALL, 1);

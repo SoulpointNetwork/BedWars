@@ -24,6 +24,7 @@ import com.funergy.bedwars.gamemanager.itemdrop.Diamond;
 import com.funergy.bedwars.gamemanager.itemdrop.Gold;
 import com.funergy.bedwars.gamemanager.itemdrop.Quartz;
 import com.funergy.bedwars.mysql.Signs;
+import com.funergy.bedwars.timers.InGameTimer;
 
 /**
  * @author Funergy
@@ -65,6 +66,7 @@ public class InGameHandler {
 		teams.remove(p);
 	}
 	public static void startGame(){
+		
 		Bedwars.setGameState("ingame");
 		if(Signs.isInList()){
 		SoulPointMySQL connection = new SoulPointMySQL();
@@ -92,11 +94,15 @@ public class InGameHandler {
 		for(Player p:yellow){
 			p.teleport(new Location(Bukkit.getWorld("world"),-173,25,-230));
 		}
+		new InGameTimer().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 20);
 		new Quartz().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 100, 30);
 		new Gold().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 100, 320);
 		new Diamond().runTaskTimer(Bedwars.getPlugin(Bedwars.class),100, 400);
 		//Start dropping stuff
 		
+	}
+	public static void end(){
+		//end stuff
 	}
 	
 

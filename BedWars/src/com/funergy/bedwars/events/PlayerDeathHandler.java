@@ -57,7 +57,6 @@ public class PlayerDeathHandler implements Listener{
 			Player p = e.getEntity();
 			if(!BedHandler.hasBed(InGameHandler.getTeam(p))){
 			Teams.removePlayerFromTeam(p);
-			ScoreBoardManager.updateSB();
 
 		}
 	}
