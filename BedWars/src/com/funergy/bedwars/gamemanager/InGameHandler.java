@@ -11,10 +11,16 @@ package com.funergy.bedwars.gamemanager;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import nl.soulpoint.api.mysql.SoulPointMySQL;
+
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.funergy.bedwars.Bedwars;
+import com.funergy.bedwars.events.BlockBreakevent;
+import com.funergy.bedwars.events.PlaceBlockEvent;
+import com.funergy.bedwars.mysql.Signs;
 
 /**
  * @author Funergy
@@ -29,7 +35,8 @@ public class InGameHandler {
 
 	public static void loadGameSettings(){
 		Bedwars.setGameState("lobby");{
-		System.out.println("[BedWars] Setting Gamestate to lobby");
+		PlaceBlockEvent.setup();
+		BlockBreakevent.setup();
 		}
 	}
 	
@@ -54,12 +61,32 @@ public class InGameHandler {
 		teams.remove(p);
 	}
 	public static void startGame(){
-		//Teleport Players to map
+		Bedwars.setGameState("ingame");
+		if(Signs.isInList()){
+		SoulPointMySQL connection = new SoulPointMySQL();
+		connection.connect();
+		Signs.setStateIngame();
+		connection.disconnect();
+		}
+		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+"Game started!");
 		for(Player p : Bukkit.getOnlinePlayers()){
+			p.getInventory().clear();
 			if(!teams.containsKey(p)){
 				Teams.randomTeam(p);
-				p.sendMessage(Bedwars.getGamePrefix()+"You are in team "+teams.get(p));
 			}
+		}
+		//The world will change to map when Waiting lobby is done
+		for(Player p:red){
+			p.teleport(new Location(Bukkit.getWorld("world"),-225,25,-178));
+		}
+		for(Player p:blue){
+			p.teleport(new Location(Bukkit.getWorld("world"),-277,25,-230));
+		}
+		for(Player p:green){
+			p.teleport(new Location(Bukkit.getWorld("world"),-225,25,-282));
+		}
+		for(Player p:yellow){
+			p.teleport(new Location(Bukkit.getWorld("world"),-173,25,-230));
 		}
 		//Start dropping stuff
 		

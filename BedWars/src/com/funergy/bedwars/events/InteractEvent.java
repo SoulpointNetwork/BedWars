@@ -33,35 +33,41 @@ public class InteractEvent implements Listener {
 			if(is.getType() == Material.WOOL){
 				
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA+"Blue team")){
-				
+				if(InGameHandler.getTeam(e.getPlayer())!=null && !InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("blue")){
+					Teams.removePlayerFromTeam(e.getPlayer());
+				}
 					Teams.addToTeam(e.getPlayer(), "blue");
-					return;
+					
 
 			
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED+"Red team")){
+				if(InGameHandler.getTeam(e.getPlayer())!=null && !InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("red")){
+					Teams.removePlayerFromTeam(e.getPlayer());
+				}
 				Teams.addToTeam(e.getPlayer(), "red");
-				return;
 
 				
 			}
 			if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Yellow team")){
+				if(InGameHandler.getTeam(e.getPlayer())!=null && !InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("yellow")){
+					Teams.removePlayerFromTeam(e.getPlayer());
+				}
 				
 					Teams.addToTeam(e.getPlayer(), "yellow");
-					return;
 
 				
 			}
 		    if(is.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GREEN+"Green team")){
+		    	if(InGameHandler.getTeam(e.getPlayer())!=null && !InGameHandler.getTeam(e.getPlayer()).equalsIgnoreCase("green")){
+					Teams.removePlayerFromTeam(e.getPlayer());
+				}
 				
 				
 					Teams.addToTeam(e.getPlayer(), "green");
-					return;
 
 				}
-		    if(InGameHandler.getTeam(e.getPlayer()) != null){
-				Teams.removePlayerFromTeam(e.getPlayer());
-			}
+		    
 			}
 			}
 	}

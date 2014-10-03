@@ -9,10 +9,12 @@
 package com.funergy.bedwars.timers;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.funergy.bedwars.Bedwars;
+import com.funergy.bedwars.gamemanager.InGameHandler;
 
 
 /**
@@ -31,21 +33,24 @@ public class LobbyTimer extends BukkitRunnable{
 	public void run() {
 		if(Bedwars.getGameState().equalsIgnoreCase("LOBBY")){
 		if (i == 0) {
-			if(Bedwars.getLobbyPCount() >=8){
-				//start game
+			//if(Bedwars.getLobbyPCount() >=8){
+				InGameHandler.startGame();
 				this.cancel();
 				return;
-			}else{
+			/*}else{
 				Bukkit.broadcastMessage(Bedwars.getGamePrefix()+"Not enough players online! 8 players needed to start");
 				for(Player p : Bukkit.getOnlinePlayers()){
 					p.setLevel(0);
 				}
 				this.cancel();
 				return;
-			}
+			}*/
 		}
 		if(i < 11){
 			Bukkit.broadcastMessage(Bedwars.getGamePrefix() +"Game starting in "+i);
+			for(Player p : Bukkit.getOnlinePlayers()){
+				p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+			}
 		}
 		for(Player p : Bukkit.getOnlinePlayers()){
 			p.setLevel(i);

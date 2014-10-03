@@ -8,9 +8,14 @@
  ******************************************************************/
 package com.funergy.bedwars.events;
 
+import java.util.ArrayList;
+
+import org.bukkit.Material;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.util.Vector;
 
 import com.funergy.bedwars.Bedwars;
 
@@ -19,7 +24,18 @@ import com.funergy.bedwars.Bedwars;
  *
  */
 public class PlaceBlockEvent implements Listener {
-	
+	public static ArrayList<Material> materials = new ArrayList<Material>();
+	public static void setup(){
+		materials.add(Material.SANDSTONE);
+		materials.add(Material.ENDER_STONE);
+		materials.add(Material.GLOWSTONE);
+		materials.add(Material.IRON_BLOCK);
+		materials.add(Material.FIRE);
+		materials.add(Material.LADDER);
+		materials.add(Material.WEB);
+		materials.add(Material.TNT);
+
+	}
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBlockPlaceEvent(BlockPlaceEvent e){
@@ -27,6 +43,18 @@ public class PlaceBlockEvent implements Listener {
 			e.setCancelled(true);
 			e.getPlayer().updateInventory();
 		}
+		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
+			if(!materials.contains(e.getBlock().getType())){
+				e.setCancelled(true);
+			}
+			if(e.getBlock().getType() == Material.TNT){
+				e.getBlockPlaced().setType(Material.AIR);
+				TNTPrimed tnt = e.getPlayer().getWorld().spawn(e.getBlockPlaced().getLocation(), TNTPrimed.class);
+				tnt.setFuseTicks(60);
+				tnt.setVelocity(new Vector(0, 0.3, 0));
+			}
+		}
+	
 	}
 
 }

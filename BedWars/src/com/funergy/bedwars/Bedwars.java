@@ -10,18 +10,15 @@ package com.funergy.bedwars;
 
 import java.sql.SQLException;
 
+import nl.soulpoint.api.mysql.SoulPointMySQL;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
+
 
 import com.funergy.bedwars.categorychooser.ShopCategories;
 import com.funergy.bedwars.events.BlockBreakevent;
@@ -33,7 +30,6 @@ import com.funergy.bedwars.events.LeaveEvent;
 import com.funergy.bedwars.events.PlaceBlockEvent;
 import com.funergy.bedwars.events.VillagerRightClick;
 import com.funergy.bedwars.gamemanager.InGameHandler;
-import com.funergy.bedwars.gamemanager.ScoreBoardManager;
 import com.funergy.bedwars.mysql.Signs;
 import com.funergy.bedwars.timers.LobbyTimer;
 
@@ -54,17 +50,8 @@ public class Bedwars extends JavaPlugin{
 
 	 static String gamePrefix = ChatColor.GRAY+"["+ChatColor.RED+"BedWars"+ChatColor.GRAY+"]: "+ChatColor.WHITE;
 	
-	@SuppressWarnings("static-access")
 	public void onEnable() {
-		Signs s = new Signs();
-		s.openConnection();
-		try {
-			Signs.setupDB();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Signs.disconnectMySQL();
+        
 		Bukkit.getPluginManager().registerEvents(new ShopCategories(), this);
 		Bukkit.getPluginManager().registerEvents(new VillagerRightClick(), this);
 		Bukkit.getPluginManager().registerEvents(new PlaceBlockEvent(), this);
@@ -101,7 +88,12 @@ public class Bedwars extends JavaPlugin{
 	public static Integer getSignID(){return id;}
 
 	public static void setIngameCount(Integer i){ingamecount=i;}
-	public static void setLobbyCount(Integer i){lobbypcount=i; if(Signs.isInList()){Signs.setPlayerc(i);}}
+	public static void setLobbyCount(Integer i){lobbypcount=i; if(Signs.isInList()){
+		SoulPointMySQL connection = new SoulPointMySQL();
+		connection.connect();
+		Signs.setPlayerc(i);
+		connection.disconnect();
+		}}
 	public static void setSpectateCount(Integer i){spectatecount=i;}
 
 	
