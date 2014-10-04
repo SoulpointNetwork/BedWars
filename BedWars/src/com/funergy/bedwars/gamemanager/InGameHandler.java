@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import nl.soulpoint.api.SoulPointAPI;
 import nl.soulpoint.api.mysql.SoulPointMySQL;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
+import org.bukkit.WorldCreator;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
@@ -26,6 +26,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.events.BlockBreakevent;
@@ -35,6 +36,9 @@ import com.funergy.bedwars.gamemanager.itemdrop.Gold;
 import com.funergy.bedwars.gamemanager.itemdrop.Quartz;
 import com.funergy.bedwars.mysql.Signs;
 import com.funergy.bedwars.timers.InGameTimer;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+
 
 /**
  * @author Funergy
@@ -46,7 +50,8 @@ public class InGameHandler {
 	public static ArrayList<Player> blue = new ArrayList<Player>();
 	public static ArrayList<Player> green = new ArrayList<Player>();
 	public static ArrayList<Player> yellow = new ArrayList<Player>();
-
+	    private static Signs mysql;
+		 private static SoulPointMySQL connection;
 	public static void loadGameSettings(){
 		Bedwars.setGameState("lobby");{
 		BedHandler.setupBed();
@@ -77,12 +82,15 @@ public class InGameHandler {
 	}
 	public static void startGame(){
 		
-		Bedwars.setGameState("ingame");
-		if(Signs.isInList()){
-		SoulPointMySQL connection = new SoulPointMySQL();
-		connection.connect();
-		Signs.setStateIngame();
-		connection.disconnect();
+		Bedwars.setGameState("INGAME");
+		if(Bedwars.isInList){
+			mysql = new Signs();
+			connection = new SoulPointMySQL();
+		    connection.connect();
+		    Signs.setStateIngame();
+		    connection.disconnect();
+		}else{
+			Bukkit.broadcastMessage("is not in list");
 		}
 		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+"Game started!");
 		for(Player p : Bukkit.getOnlinePlayers()){
@@ -91,40 +99,76 @@ public class InGameHandler {
 				Teams.randomTeam(p);
 			}
 		}
-		//The world will change to map when Waiting lobby is done
 		for(Player p:red){
-			p.teleport(new Location(Bukkit.getWorld("world"),-225,25,-178));
+			p.teleport(new Location(Bukkit.getWorld("map"),-225,25,-178));
 		}
 		for(Player p:blue){
-			p.teleport(new Location(Bukkit.getWorld("world"),-277,25,-230));
+			p.teleport(new Location(Bukkit.getWorld("map"),-277,25,-230));
 		}
 		for(Player p:green){
-			p.teleport(new Location(Bukkit.getWorld("world"),-225,25,-282));
+			p.teleport(new Location(Bukkit.getWorld("map"),-225,25,-282));
 		}
 		for(Player p:yellow){
-			p.teleport(new Location(Bukkit.getWorld("world"),-173,25,-230));
+			p.teleport(new Location(Bukkit.getWorld("map"),-173,25,-230));
 		}
-		new InGameTimer().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 20);
 		new Quartz().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 100, 30);
 		new Gold().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 100, 320);
 		new Diamond().runTaskTimer(Bedwars.getPlugin(Bedwars.class),100, 400);
+		new InGameTimer().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 20);
 		//Start dropping stuff
 		
 	}
 	public static void end(){
+		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.RED+"Server restarting in 15 seconds");
+		new BukkitRunnable(){	
+		public void run(){
 		for(Player p : Bukkit.getOnlinePlayers()){
 			p.getInventory().setArmorContents(new ItemStack[4]);
 			p.getInventory().clear();
-			SoulPointAPI.getServers().sendToLobby(p);
+			connect(p);
 		}
-		Bukkit.unloadWorld("map", false);{
-			Bukkit.shutdown();
 		}
-
+		}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 150);
 	}
+	public static void resetmap(){
+		new BukkitRunnable(){	
+			public void run(){
+				Bukkit.unloadWorld("map", false);
+				
+			
+			}
+			}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 200);
+			
+			
+			new BukkitRunnable(){	
+			public void run(){
+					Bukkit.getServer().createWorld(new WorldCreator("map"));
+					Bukkit.getWorld("map").setAutoSave(false);
+					
+				
+				}
+				}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 350);
+			
+				
+				
+			new BukkitRunnable(){	
+				public void run(){
+				
+                Bukkit.shutdown();					
+				
+				}
+				}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 400);
+	}
+	 public static void connect(Player p){
+		 ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		  out.writeUTF("Connect");
+		  out.writeUTF("LO01");
+		  p.sendPluginMessage(Bedwars.getPlugin(Bedwars.class), "BungeeCord", out.toByteArray());
+	 }
 	public static void yellowWins(){
+		Bedwars.setGameState("end");
 		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.YELLOW+"Yellow team has won the Bedwars Game!");
-		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+"All Yellow player tributes:");
+		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+"All Yellow player tributes alive:");
 		 StringBuilder msgBuilder = new StringBuilder();
 		for (Player p : yellow) {
             msgBuilder.append(p.getName()).append(", ");
@@ -160,12 +204,16 @@ public class InGameHandler {
         
          fw.setFireworkMeta(fwm); 
 		}
+		end();
+		resetmap();
+
 		
 		
 	}
 	public static void greenWins(){
+		Bedwars.setGameState("end");
 		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+"Green team has won the Bedwars Game!");
-		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+"All Green player tributes:");
+		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+"All Green player tributes alive:");
 		 StringBuilder msgBuilder = new StringBuilder();
 		for (Player p : green) {
             msgBuilder.append(p.getName()).append(", ");
@@ -201,11 +249,16 @@ public class InGameHandler {
         
          fw.setFireworkMeta(fwm); 
 		}
+		end();
+		resetmap();
+
+
 		
 	}
 	public static void redWins(){
+		Bedwars.setGameState("end");
 		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.RED+"Red team has won the Bedwars Game!");
-		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+"All Red player tributes:");
+		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+"All Red player tributes alive:");
 		 StringBuilder msgBuilder = new StringBuilder();
 		for (Player p : green) {
             msgBuilder.append(p.getName()).append(", ");
@@ -241,11 +294,16 @@ public class InGameHandler {
         
          fw.setFireworkMeta(fwm); 
 		}
+		end();
+		resetmap();
+
+
 		
 	}
 	public static void blueWins(){
+		Bedwars.setGameState("end");
 		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.AQUA+"Blue team has won the Bedwars Game!");
-		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+"All Blue player tributes:");
+		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+"All Blue player tributes alive:");
 		 StringBuilder msgBuilder = new StringBuilder();
 		for (Player p : blue) {
             msgBuilder.append(p.getName()).append(", ");
@@ -281,6 +339,9 @@ public class InGameHandler {
         
          fw.setFireworkMeta(fwm); 
 		}
+		end();
+		resetmap();
+
 		
 	}
 	

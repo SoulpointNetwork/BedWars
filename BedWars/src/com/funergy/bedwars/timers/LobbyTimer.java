@@ -33,18 +33,18 @@ public class LobbyTimer extends BukkitRunnable{
 	public void run() {
 		if(Bedwars.getGameState().equalsIgnoreCase("LOBBY")){
 		if (i == 0) {
-			//if(Bedwars.getLobbyPCount() >=8){
+			if(Bedwars.getLobbyPCount() >=8){
 				InGameHandler.startGame();
 				this.cancel();
 				return;
-			/*}else{
+			}else{
 				Bukkit.broadcastMessage(Bedwars.getGamePrefix()+"Not enough players online! 8 players needed to start");
 				for(Player p : Bukkit.getOnlinePlayers()){
 					p.setLevel(0);
 				}
 				this.cancel();
 				return;
-			}*/
+			}
 		}
 		if(i < 11){
 			Bukkit.broadcastMessage(Bedwars.getGamePrefix() +"Game starting in "+i);

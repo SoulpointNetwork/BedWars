@@ -12,52 +12,37 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.AntiSpawnKill;
-import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.gamemanager.SpectatorHandler;
 
 /**
  * @author Funergy
  *
  */
-public class HitEvent implements Listener{
+public class DamageEvent implements Listener{
+	
 	@EventHandler
-	public void onHitEvent(EntityDamageByEntityEvent e){
-		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
-			e.setCancelled(true);
-		}
+	public void damageEvent(EntityDamageEvent e){
+		if(e.getEntity() instanceof Player){
+		Player p = (Player) e.getEntity();
 		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
 			if(e.getEntity() instanceof Villager){
 				e.setCancelled(true);
 			}
-			if(e.getEntity() instanceof Player&&e.getDamager() instanceof Player){
-			Player p = (Player) e.getEntity();
-			Player d = (Player) e.getDamager();
-			String ps = InGameHandler.getTeam(p);
-			String ds = InGameHandler.getTeam(d);
-			if(ps.equalsIgnoreCase(ds)){
-				e.setCancelled(true);
-				return;
-			}
 			if(AntiSpawnKill.isInList(p)){
 				e.setCancelled(true);
-				d.sendMessage(Bedwars.getGamePrefix()+"That player has spawn protection");
 			}
-			if(AntiSpawnKill.isInList(d)){
-				e.setCancelled(true);
-				d.sendMessage(Bedwars.getGamePrefix()+"You can't hit players with spawn protection!");
-			}
-			if(SpectatorHandler.spectators.contains(d)){
-				e.setCancelled(true);
-			}
-			
 		}
+		if(SpectatorHandler.spectators.contains(p)){
+			e.setCancelled(true);
 		}
 		if(Bedwars.getGameState().equalsIgnoreCase("end")){
 			e.setCancelled(true);
 		}
+		}
 	}
+
 }

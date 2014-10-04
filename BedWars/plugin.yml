@@ -4,6 +4,6 @@ version: 1.0.0
 author: Funergy
 description: Bedwars
 commands:
-   intro:
-   win:
+   start:
+   ending:
 

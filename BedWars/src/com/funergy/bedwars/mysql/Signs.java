@@ -7,14 +7,7 @@
  * http://www.eclipse.org/org/documents/epl-v10.php
  ******************************************************************/
 package com.funergy.bedwars.mysql;
-/*******************************************************************
- * Copyright (c) 2014 Soulpoint Company
- * THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS 
- * ECLIPSE PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR 
- * DISTRIBUTION OF THE PROGRAM CONSTITUTES RECIPIENT’S ACCEPTANCE
- * OF THIS AGREEMENT. The full license is available at:
- * http://www.eclipse.org/org/documents/epl-v10.php
- ******************************************************************/
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -28,7 +21,6 @@ import nl.soulpoint.api.mysql.SoulPointMySQL;
  */
 public class Signs {
 	private static SoulPointMySQL connection;
-	public static boolean inList = false;
 	 
 	public Signs() {
         connection = new SoulPointMySQL();
@@ -49,18 +41,10 @@ public class Signs {
     	}
     }
     
-    public static boolean isInList(){
-    	if(inList)return true;
-		return false;
-    	
-    }
-    public static void setIsInList(boolean answer){
-    	inList = answer;
-    }
-    
+   
     public static void setStateIngame(){
     	try {
-    		connection.executeUpdate("UPDATE `BWservers` SET STATE="+Bedwars.getGameState()+" WHERE ID="+Bedwars.getSignID()+";");
+    		connection.executeUpdate("UPDATE `BWservers` SET STATE='"+"INGAME"+"' WHERE ID='"+Bedwars.getSignID()+"';");
     } catch (Exception e) {
             e.printStackTrace();
     }

@@ -28,7 +28,7 @@ public class Diamond extends BukkitRunnable{
 
 	@Override
 	public void run() {
-		Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-225,26,-230),itemStack(Material.DIAMOND,1,ChatColor.AQUA+"Diamond",null));
+		Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,26,-230),itemStack(Material.DIAMOND,1,ChatColor.AQUA+"Diamond",null));
 
 	}
 	

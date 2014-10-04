@@ -8,30 +8,22 @@
  ******************************************************************/
 package com.funergy.bedwars.events;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 
-import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.SpectatorHandler;
 
 /**
  * @author Funergy
  *
  */
-public class FoodLevelChange implements Listener{
+public class ItemPickupevent implements Listener{
 	@EventHandler
-	public void onFoodLevelChangeEvent(FoodLevelChangeEvent e){
-	if(e.getEntity() instanceof Player){
-		Player p =(Player) e.getEntity();
-		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
+	public void onPickupItemEven(PlayerPickupItemEvent e){
+		if(SpectatorHandler.spectators.contains(e.getPlayer())){
 			e.setCancelled(true);
 		}
-		if(SpectatorHandler.spectators.contains(p)){
-			e.setCancelled(true);
-		}
-	}
 	}
 
 }

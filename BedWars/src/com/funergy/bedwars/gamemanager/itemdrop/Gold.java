@@ -28,16 +28,16 @@ public class Gold extends BukkitRunnable{
 
 	@Override
 	public void run() {
-		Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-225,35,-175),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
-        Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-280,35,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
-        Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-225,35,-285),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
-        Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-170,35,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+		Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,35,-175),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-280,35,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,35,-285),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-170,35,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
         
         
-    	Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-225,25,-225),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
-        Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-220,25,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
-        Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-225,25,-234),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
-        Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-229,25,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+    	Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,25,-225),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-220,25,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,25,-234),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-229,25,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
 
 
 	}

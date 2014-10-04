@@ -12,26 +12,30 @@ import nl.soulpoint.api.mysql.SoulPointMySQL;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.WorldCreator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.funergy.bedwars.categorychooser.ShopCategories;
 import com.funergy.bedwars.events.BlockBreakevent;
+import com.funergy.bedwars.events.DamageEvent;
 import com.funergy.bedwars.events.FoodLevelChange;
 import com.funergy.bedwars.events.HitEvent;
 import com.funergy.bedwars.events.InteractEvent;
 import com.funergy.bedwars.events.ItemDropEvent;
+import com.funergy.bedwars.events.ItemPickupevent;
 import com.funergy.bedwars.events.JoinEvent;
 import com.funergy.bedwars.events.LeaveEvent;
 import com.funergy.bedwars.events.PlaceBlockEvent;
 import com.funergy.bedwars.events.PlayerDeathHandler;
+import com.funergy.bedwars.events.ShopCategories;
 import com.funergy.bedwars.events.TnTExplosionEvent;
 import com.funergy.bedwars.events.VillagerRightClick;
-import com.funergy.bedwars.gamemanager.BedHandler;
 import com.funergy.bedwars.gamemanager.InGameHandler;
+import com.funergy.bedwars.gamemanager.SpectatorHandler;
 import com.funergy.bedwars.mysql.Signs;
+import com.funergy.bedwars.timers.LobbyTimer;
 
 /**
  * @author Funergy
@@ -42,16 +46,17 @@ public class Bedwars extends JavaPlugin{
 	static int ingamecount = 0;
 	 static int spectatecount = 0;
 	 static String gameState = "lobby";
-	
-	 static String mapName ="Quartz";
-	 static String serverName ="BW1";
-	 static int id = 0;
+	public static boolean isInList=false;
+	 static String mapName ="Test map";
+	 static String serverName ="BW01";
+	 static int id = 1;
 	 public Signs s;
+	    private static Signs mysql;
+	 private static SoulPointMySQL connection;
 
 	 static String gamePrefix = ChatColor.GRAY+"["+ChatColor.RED+"BedWars"+ChatColor.GRAY+"]: "+ChatColor.WHITE;
 	
 	public void onEnable() {
-        
 		Bukkit.getPluginManager().registerEvents(new ShopCategories(), this);
 		Bukkit.getPluginManager().registerEvents(new VillagerRightClick(), this);
 		Bukkit.getPluginManager().registerEvents(new PlaceBlockEvent(), this);
@@ -64,13 +69,17 @@ public class Bedwars extends JavaPlugin{
 		Bukkit.getPluginManager().registerEvents(new PlayerDeathHandler(), this);
 		Bukkit.getPluginManager().registerEvents(new TnTExplosionEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new HitEvent(), this);
+		Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
+		Bukkit.getPluginManager().registerEvents(new SpectatorHandler(), this);
+		Bukkit.getPluginManager().registerEvents(new ItemPickupevent(), this);
+	    this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
 
-		/*Bukkit.getServer().createWorld(new WorldCreator("map"));
+		Bukkit.getServer().createWorld(new WorldCreator("map"));
 		Bukkit.getWorld("map").setAutoSave(false);
-		
+	
 		putInList();
-		*/
+		
 	    InGameHandler.loadGameSettings();{
 	    System.out.println("[BedWars] Loaded game settings");}
 			
@@ -90,25 +99,33 @@ public class Bedwars extends JavaPlugin{
 	public static Integer getSignID(){return id;}
 
 	public static void setIngameCount(Integer i){ingamecount=i;}
-	public static void setLobbyCount(Integer i){lobbypcount=i; if(Signs.isInList()){
-		SoulPointMySQL connection = new SoulPointMySQL();
-		connection.connect();
+	public static void setLobbyCount(Integer i){
+		lobbypcount=i; 
+	    if(isInList){
+		mysql = new Signs();
+		connection = new SoulPointMySQL();
+        connection.connect();
 		Signs.setPlayerc(i);
 		connection.disconnect();
 		}}
 	public static void setSpectateCount(Integer i){spectatecount=i;}
 
 	
-	public void putInList(){
-		Signs.openConnection();
+	public static void putInList(){
+		
 		new BukkitRunnable(){
 
 			@Override
 			public void run() {
 				if(getGameState().equalsIgnoreCase("lobby")){
+					Bukkit.broadcastMessage("trying");
+					mysql = new Signs();
+					connection = new SoulPointMySQL();
+			        connection.connect();
 					if(Signs.getid() == null){
 					Signs.setId();
-					Signs.setIsInList(true);
+					System.out.println("Sign is in mysql");
+					isInList = true;
 					Signs.disconnectMySQL();
 					this.cancel();
 					return;
@@ -120,21 +137,24 @@ public class Bedwars extends JavaPlugin{
 				
 			}
 			
-		}.runTaskTimer(this, 0, 10);
+		}.runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 20);
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String label, String[] args) {
-		if(cmd.getName().equalsIgnoreCase("intro")){
-			  InGameHandler.startGame();
-			  
+		if(cmd.getName().equalsIgnoreCase("start")){
+			if(sender.isOp()){
+				InGameHandler.startGame();
+			}
 		}
-		if(cmd.getName().equalsIgnoreCase("win")){
-			InGameHandler.yellowWins();
+		if(cmd.getName().equalsIgnoreCase("ending")){
+			if(sender.isOp()){
+				InGameHandler.end();
+			}
 		}
-		
-		return false;
+	return false;
 	}
+	
 	
 	
 

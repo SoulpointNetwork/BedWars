@@ -23,6 +23,7 @@ import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.BedHandler;
 import com.funergy.bedwars.gamemanager.ChestHandler;
 import com.funergy.bedwars.gamemanager.InGameHandler;
+import com.funergy.bedwars.gamemanager.SpectatorHandler;
 
 /**
  * @author Funergy
@@ -52,7 +53,7 @@ public class BlockBreakevent implements Listener {
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 			e.setCancelled(true);
 		}
-		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
+		if(Bedwars.getGameState().equalsIgnoreCase("ingame")||Bedwars.getGameState().equalsIgnoreCase("end")){
 			if(e.getBlock().getType() == Material.BED_BLOCK){
 				Location b = e.getBlock().getLocation();
 				if(BedHandler.isTeamBed(InGameHandler.getTeam(e.getPlayer()).toLowerCase(), b)){
@@ -77,6 +78,9 @@ public class BlockBreakevent implements Listener {
 				e.setCancelled(true);
 			}
 			
+		}
+		if(SpectatorHandler.spectators.contains(e.getPlayer())){
+			e.setCancelled(true);
 		}
 	}
 

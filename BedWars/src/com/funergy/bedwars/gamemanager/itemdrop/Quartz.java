@@ -29,10 +29,10 @@ public class Quartz extends BukkitRunnable{
 
 	@Override
 	public void run() {
-    Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-225,35,-175),itemStack(Material.QUARTZ,1,"Quartz",null));
-    Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-280,35,-230),itemStack(Material.QUARTZ,1,"Quartz",null));
-    Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-225,35,-285),itemStack(Material.QUARTZ,1,"Quartz",null));
-    Bukkit.getWorld("world").dropItemNaturally(new Location(Bukkit.getWorld("world"),-170,35,-230),itemStack(Material.QUARTZ,1,"Quartz",null));
+    Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,35,-175),itemStack(Material.QUARTZ,1,"Quartz",null));
+    Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-280,35,-230),itemStack(Material.QUARTZ,1,"Quartz",null));
+    Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,35,-285),itemStack(Material.QUARTZ,1,"Quartz",null));
+    Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-170,35,-230),itemStack(Material.QUARTZ,1,"Quartz",null));
 
 	}
 	

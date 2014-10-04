@@ -8,6 +8,7 @@
  ******************************************************************/
 package com.funergy.bedwars.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -29,6 +30,9 @@ public class LeaveEvent implements Listener{
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 		    e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
 			e.getPlayer().getInventory().clear();
+				Bedwars.setLobbyCount(Bukkit.getOnlinePlayers().length-1);
+			}
+		
 			if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
 			Teams.removePlayerFromTeam(e.getPlayer());
 			if(InGameHandler.blue.size() == 0 && InGameHandler.green.size() == 0 && InGameHandler.yellow.size() == 0){
@@ -48,7 +52,6 @@ public class LeaveEvent implements Listener{
 			e.getPlayer().getInventory().clear();
 
 			
-		}
 		}
 	}
 	@EventHandler
@@ -57,6 +60,9 @@ public class LeaveEvent implements Listener{
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 		    e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
 			e.getPlayer().getInventory().clear();
+			Bedwars.setLobbyCount(Bukkit.getOnlinePlayers().length-1);
+			
+		}
 			if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
 			Teams.removePlayerFromTeam(e.getPlayer());
 			if(InGameHandler.blue.size() == 0 && InGameHandler.green.size() == 0 && InGameHandler.yellow.size() == 0){
@@ -76,7 +82,6 @@ public class LeaveEvent implements Listener{
 			e.getPlayer().getInventory().clear();
 
 			
-		}
 		}
 	}
 

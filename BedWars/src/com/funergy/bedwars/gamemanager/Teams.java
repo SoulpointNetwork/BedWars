@@ -20,25 +20,30 @@ import com.funergy.bedwars.Bedwars;
 public class Teams {
 	
 	public static void randomTeam(Player p){
-		if(InGameHandler.red.size() !=4){
+		int red =InGameHandler.red.size();
+		int blue =InGameHandler.blue.size();
+		int yellow =InGameHandler.yellow.size();
+		int green =InGameHandler.green.size();
+
+		if(red < blue && red<green && red < yellow){
 			InGameHandler.addToTeam(p, "red");
 			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.RED+"RED");
 			ScoreBoardManager.updateSB();
 			return;
 		}
-		if(InGameHandler.green.size() !=4){
+		if(green < blue && green < yellow && green < red){
 			InGameHandler.addToTeam(p, "green");
 			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.GREEN+"GREEN");
 			ScoreBoardManager.updateSB();
 			return;
 		}
-		if(InGameHandler.yellow.size() !=4){
+		if(yellow <green && yellow < red && yellow < blue){
 			InGameHandler.addToTeam(p, "yellow");
 			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.YELLOW+"YELLOW");
 			ScoreBoardManager.updateSB();
 			return;
 		}
-		if(InGameHandler.blue.size() !=4){
+		if(blue < green && blue < yellow && blue < red){
 			InGameHandler.addToTeam(p, "blue");
 			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+"BLUE");
 			ScoreBoardManager.updateSB();

@@ -16,35 +16,39 @@ import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import com.funergy.bedwars.Bedwars;
-
 
 /**
  * @author Funergy
  *
  */
-public class LobbyPlayerHandler {
-	
-	public static void setLobbyPlayerCount(Integer pcount){
-		Bedwars.setLobbyCount(pcount);
-	}
-	public static void giveItems(Player p){
-		p.getInventory().setItem(0, itemStack(Material.WOOL,DyeColor.CYAN, 1, "&bBlue team", "Right click to open the GUI"));
-		p.getInventory().setItem(1, itemStack(Material.WOOL,DyeColor.GREEN, 1, "&aGreen team", "Right click to open the GUI"));
-		p.getInventory().setItem(2, itemStack(Material.WOOL,DyeColor.RED, 1, "&cRed Team", "Right click to open the GUI"));
-		p.getInventory().setItem(3, itemStack(Material.WOOL,DyeColor.YELLOW, 1, "&eYellow Team", "Right click to open the GUI"));
+public class SpectatorHandler implements Listener{
+	public static ArrayList<Player> spectators = new ArrayList<Player>();
 
-	}
-	public static void teleportPlayer(Player p){
+	public static void addSpectator(Player p){
 		p.teleport(new Location(Bukkit.getWorld("world"),-303,28,-304));
+		p.setAllowFlight(true);
+	        p.setFlying(true);
+	        spectators.add(p);
+	        for(Player pl : Bukkit.getOnlinePlayers()){
+	        		pl.hidePlayer(p);
+	        }
+	        p.getInventory().setItem(0, itemStack(Material.COMPASS,1,null,"§aTeleporter","Right click to use"));
 	}
-	
 	@SuppressWarnings("deprecation")
-	public static ItemStack itemStack(Material mat,DyeColor color, Integer amount, String displayname, String Lore){
-		ItemStack im = new ItemStack(mat,amount,color.getData());
+	public static ItemStack itemStack(Material mat, Integer amount,DyeColor c ,String displayname, String Lore){
+		ItemStack im;
+		if(c !=null){
+		im = new ItemStack(mat,amount,c.getData());
+		}else{
+	    im = new ItemStack(mat,amount);
+		}
 		ItemMeta m = im.getItemMeta();
 		if(displayname !=null){
 		m.setDisplayName(ChatColor.translateAlternateColorCodes('&',displayname));
@@ -57,6 +61,4 @@ public class LobbyPlayerHandler {
 		
 		return im;
 	}
-
-
 }

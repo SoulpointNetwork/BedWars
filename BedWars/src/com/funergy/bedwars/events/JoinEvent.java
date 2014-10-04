@@ -18,6 +18,7 @@ import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.gamemanager.LobbyPlayerHandler;
 import com.funergy.bedwars.gamemanager.ScoreBoardManager;
+import com.funergy.bedwars.gamemanager.SpectatorHandler;
 import com.funergy.bedwars.timers.LobbyTimer;
 
 
@@ -30,6 +31,7 @@ public class JoinEvent implements Listener {
 
 	@EventHandler
 	public void playerJoinEvent(PlayerJoinEvent e){
+		  ScoreBoardManager.openScoreboard(e.getPlayer());
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 		  LobbyPlayerHandler.setLobbyPlayerCount(Bukkit.getOnlinePlayers().length);
 		  LobbyPlayerHandler.giveItems(e.getPlayer());
@@ -37,7 +39,6 @@ public class JoinEvent implements Listener {
 		  e.getPlayer().setFoodLevel(20);
 		  e.getPlayer().setHealth(20);
 		  e.setJoinMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+e.getPlayer().getName()+ChatColor.WHITE+" Has joined the game ("+Bedwars.getLobbyPCount()+"/16)");
-		  ScoreBoardManager.openScoreboard(e.getPlayer());
 		  
 		  if(Bedwars.getLobbyPCount() >= 8){
 				int red = InGameHandler.red.size();
@@ -49,9 +50,11 @@ public class JoinEvent implements Listener {
 				}
 		  }
 		  
-		}else if(Bedwars.getGameState().equalsIgnoreCase("INGAME")){
-			//add them to the spectator handler
-			//teleport them,...
+		}else if(Bedwars.getGameState().equalsIgnoreCase("INGAME")||Bedwars.getGameState().equalsIgnoreCase("end")){
+			SpectatorHandler.addSpectator(e.getPlayer());
+			  e.getPlayer().setFoodLevel(20);
+			  e.getPlayer().setHealth(20);
+			e.setJoinMessage(null);
 		
 		}
 	}

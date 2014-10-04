@@ -6,25 +6,37 @@
  * OF THIS AGREEMENT. The full license is available at:
  * http://www.eclipse.org/org/documents/epl-v10.php
  ******************************************************************/
-package com.funergy.bedwars.events;
+package com.funergy.bedwars.timers;
 
-import org.bukkit.entity.EntityType;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import com.funergy.bedwars.gamemanager.AntiSpawnKill;
 
 /**
  * @author Funergy
  *
  */
-public class VillagerRightClick implements Listener {
+public class SpawnKillTimer extends BukkitRunnable{
+	int i = 5;
+	public Player p;
 	
-	@EventHandler
-	public void onRightClickEntity(PlayerInteractEntityEvent e){
-		if(e.getRightClicked().getType()== EntityType.VILLAGER){
-			ShopCategories.showShop(e.getPlayer());
-			e.setCancelled(true);
+	public SpawnKillTimer(Player pl){
+		this.p = pl;
+	}
+	
+	@Override
+	public void run() {
+		if(i == 0){
+			p.setLevel(0);
+			AntiSpawnKill.removePlayer(p);
+			this.cancel();
+			return;
 		}
 		
+		p.setLevel(i);
+		i--;
+		
 	}
+
 }

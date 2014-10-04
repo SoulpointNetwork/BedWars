@@ -15,11 +15,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
 
 import com.funergy.bedwars.Bedwars;
+import com.funergy.bedwars.gamemanager.AntiSpawnKill;
 import com.funergy.bedwars.gamemanager.BedHandler;
 import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.gamemanager.ScoreBoardManager;
+import com.funergy.bedwars.gamemanager.SpectatorHandler;
 import com.funergy.bedwars.gamemanager.Teams;
 
 /**
@@ -30,26 +33,25 @@ public class PlayerDeathHandler implements Listener{
 	@EventHandler
 	public void onRespawnEvent(PlayerRespawnEvent e){
 		if(InGameHandler.getTeam(e.getPlayer())!=null){
-			Bukkit.broadcastMessage("respawned");
 			String s = InGameHandler.getTeam(e.getPlayer());
 			if(s.equalsIgnoreCase("red")){
-				e.setRespawnLocation(new Location(Bukkit.getWorld("world"),-225,25,-178));
+				e.setRespawnLocation(new Location(Bukkit.getWorld("map"),-225,25,-178));
 			}
 			if(s.equalsIgnoreCase("blue")){
-				e.setRespawnLocation(new Location(Bukkit.getWorld("world"),-277,25,-230));
+				e.setRespawnLocation(new Location(Bukkit.getWorld("map"),-277,25,-230));
 			}
 			if(s.equalsIgnoreCase("green")){
-				e.setRespawnLocation(new Location(Bukkit.getWorld("world"),-225,25,-282));
+				e.setRespawnLocation(new Location(Bukkit.getWorld("map"),-225,25,-282));
 			}
 			if(s.equalsIgnoreCase("yellow")){
-				e.setRespawnLocation(new Location(Bukkit.getWorld("world"),-173,25,-230));
+				e.setRespawnLocation(new Location(Bukkit.getWorld("map"),-173,25,-230));
 			}
 			e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You've respawned because your bed hasn't been broken.");
-		
+			AntiSpawnKill.addPlayer(e.getPlayer());
 		}else{
-        e.getPlayer().setAllowFlight(true);
-        e.getPlayer().setFlying(true);
+			SpectatorHandler.addSpectator(e.getPlayer());
 		}
+		
 	}
 	@EventHandler
 	public void onDeathEvent(PlayerDeathEvent e){
@@ -57,8 +59,27 @@ public class PlayerDeathHandler implements Listener{
 			Player p = e.getEntity();
 			if(!BedHandler.hasBed(InGameHandler.getTeam(p))){
 			Teams.removePlayerFromTeam(p);
+			if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
+				Teams.removePlayerFromTeam(p);
+				if(InGameHandler.blue.size() == 0 && InGameHandler.green.size() == 0 && InGameHandler.yellow.size() == 0){
+					InGameHandler.redWins();
+				}
+				if(InGameHandler.green.size() == 0 && InGameHandler.red.size() == 0 && InGameHandler.yellow.size()==  0){
+					InGameHandler.blueWins();
+				}
+				if(InGameHandler.blue.size() == 0 && InGameHandler.yellow.size() == 0 && InGameHandler.red.size() == 0){
+					InGameHandler.greenWins();
+				}
+				if(InGameHandler.green.size() == 0 && InGameHandler.red.size() == 0 && InGameHandler.blue.size() == 0){
+					InGameHandler.yellowWins();
+				}
+				Teams.removePlayerFromTeam(p);
+				p.getInventory().setArmorContents(new ItemStack[4]);
+				p.getInventory().clear();
+
 
 		}
+			}
 	}
 	}
 

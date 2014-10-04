@@ -25,17 +25,17 @@ public class BedHandler {
 
 
 	public static void setupBed(){
-		Location red1 = new Location(Bukkit.getWorld("world"),-225,16,-175);
-		Location red2 = new Location(Bukkit.getWorld("world"),-225,16,-174);
+		Location red1 = new Location(Bukkit.getWorld("map"),-225,16,-175);
+		Location red2 = new Location(Bukkit.getWorld("map"),-225,16,-174);
 
-		Location yellow1 = new Location(Bukkit.getWorld("world"),-170,16,-230);
-		Location yellow2 = new Location(Bukkit.getWorld("world"),-169,16,-230);
+		Location yellow1 = new Location(Bukkit.getWorld("map"),-170,16,-230);
+		Location yellow2 = new Location(Bukkit.getWorld("map"),-169,16,-230);
 
-		Location green1 = new Location(Bukkit.getWorld("world"),-225,16,-285);
-		Location green2 = new Location(Bukkit.getWorld("world"),-225,16,-286);
+		Location green1 = new Location(Bukkit.getWorld("map"),-225,16,-285);
+		Location green2 = new Location(Bukkit.getWorld("map"),-225,16,-286);
 
-		Location blue1 = new Location(Bukkit.getWorld("world"),-280,16,-230);
-		Location blue2 = new Location(Bukkit.getWorld("world"),-281,16,-230);
+		Location blue1 = new Location(Bukkit.getWorld("map"),-280,16,-230);
+		Location blue2 = new Location(Bukkit.getWorld("map"),-281,16,-230);
 
 		red.add(red1);
 		red.add(red2);
