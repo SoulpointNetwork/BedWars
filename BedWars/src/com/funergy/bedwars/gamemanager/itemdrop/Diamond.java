@@ -18,6 +18,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.funergy.bedwars.Bedwars;
+
 /**
  * @author Funergy
  *
@@ -28,8 +30,9 @@ public class Diamond extends BukkitRunnable{
 
 	@Override
 	public void run() {
+		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
 		Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,26,-230),itemStack(Material.DIAMOND,1,ChatColor.AQUA+"Diamond",null));
-
+		}
 	}
 	
 	

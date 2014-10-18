@@ -122,7 +122,7 @@ public class ShopCategories implements Listener {
 		
 		
 		if(e.getInventory().getTitle().equalsIgnoreCase("Teleporter")){
-			if(e.getCurrentItem() ==  itemStack(Material.WOOL,1, DyeColor.CYAN, "&bBlue team", null)){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA+"Blue team")){
 				Inventory inv = Bukkit.createInventory(null, 18,"Blue team");
 				int i = 3;
 				for(Player p : InGameHandler.blue){
@@ -143,8 +143,9 @@ public class ShopCategories implements Listener {
 						i=3;
 					}
 				}
+				e.getWhoClicked().openInventory(inv);
 			}
-			if(e.getCurrentItem() == itemStack(Material.WOOL,1, DyeColor.GREEN, "&aGreen team", null)){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GREEN+"Green team")){
 				Inventory inv = Bukkit.createInventory(null, 18,"Green team");
 				int i = 3;
 				for(Player p : InGameHandler.green){
@@ -165,8 +166,10 @@ public class ShopCategories implements Listener {
 						i=3;
 					}
 				}
+				e.getWhoClicked().openInventory(inv);
+
 			}
-			if(e.getCurrentItem() == itemStack(Material.WOOL,1, DyeColor.YELLOW, "&eYellow team", null)){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Yellow team")){
 				Inventory inv = Bukkit.createInventory(null, 18,"Yellow team");
 				int i = 3;
 				for(Player p : InGameHandler.yellow){
@@ -187,8 +190,10 @@ public class ShopCategories implements Listener {
 						i=3;
 					}
 				}
+				e.getWhoClicked().openInventory(inv);
+
 			}
-			if(e.getCurrentItem() == itemStack(Material.WOOL,1, DyeColor.RED, "&cRed team", null)){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED+"Red team")){
 				Inventory inv = Bukkit.createInventory(null, 18,"Red team");
 				int i = 3;
 				for(Player p : InGameHandler.red){
@@ -209,6 +214,8 @@ public class ShopCategories implements Listener {
 						i=3;
 					}
 				}
+				e.getWhoClicked().openInventory(inv);
+
 			}
 			e.setCancelled(true);
 		}
@@ -217,7 +224,7 @@ public class ShopCategories implements Listener {
 			Player p = (Player) e.getWhoClicked();
 			Player pl = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
 			p.teleport(pl);
-			
+			p.closeInventory();
 			e.setCancelled(true);
 		}
 	    if(e.getInventory().getTitle().equalsIgnoreCase("Red team")){
@@ -225,7 +232,8 @@ public class ShopCategories implements Listener {
 			Player p = (Player) e.getWhoClicked();
 			Player pl = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
 			p.teleport(pl);
-			
+			p.closeInventory();
+
 			e.setCancelled(true);
 		}
 	    if(e.getInventory().getTitle().equalsIgnoreCase("Yellow team")){
@@ -233,7 +241,8 @@ public class ShopCategories implements Listener {
 			Player p = (Player) e.getWhoClicked();
 			Player pl = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
 			p.teleport(pl);
-			
+			p.closeInventory();
+
 			e.setCancelled(true);
 		}
 	    if(e.getInventory().getTitle().equalsIgnoreCase("Green team")){
@@ -241,7 +250,8 @@ public class ShopCategories implements Listener {
 			Player p = (Player) e.getWhoClicked();
 			Player pl = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
 			p.teleport(pl);
-			
+			p.closeInventory();
+
 			e.setCancelled(true);
 		}
 	}

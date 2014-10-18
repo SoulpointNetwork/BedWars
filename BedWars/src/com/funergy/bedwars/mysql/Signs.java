@@ -8,34 +8,44 @@
  ******************************************************************/
 package com.funergy.bedwars.mysql;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.funergy.bedwars.Bedwars;
-
-import nl.soulpoint.api.mysql.SoulPointMySQL;
 
 /**
  * @author Funergy
  *
  */
 public class Signs {
-	private static SoulPointMySQL connection;
+	private static Connection connection;
 	 
 	public Signs() {
-        connection = new SoulPointMySQL();
-    }
-	public static void openConnection(){
-        connection = new SoulPointMySQL();
-        connection.connect();
+		 try {
+	            Class.forName("com.mysql.jdbc.Driver");
+	            connection = DriverManager.getConnection("jdbc:mysql://eu.hostskool.com/joey" + "?user=joey" + "&password=xCj2mQmvSW7jHMRj" );
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 	}
 	
+	
     public static void setupDB() throws SQLException {
-                connection.executeUpdate("CREATE TABLE IF NOT EXISTS `BWservers`(`ID` integer,`NAME` varchar(100),`MAP` varchar(100),`PLAYERC` integer,`MAXP` integer,`STATE` varchar(100))");
-        }
+    	try{
+    		PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `BWservers`(`ID` integer,`NAME` varchar(100),`MAP` varchar(100),`PLAYERC` integer,`MAXP` integer,`STATE` varchar(100))");
+    		statement.executeUpdate();
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	}
+    	
     public static void setId(){
     	try{
-    		connection.executeUpdate("INSERT INTO `BWservers`(ID,NAME,MAP,PLAYERC,MAXP,STATE)\nvalues ('"+Bedwars.getSignID()+"','"+Bedwars.getServerName()+"','" + Bedwars.getMapName() + "', '" +0+"','"+16+"','"+"LOBBY"+"');");
+    		PreparedStatement statement = connection.prepareStatement("INSERT INTO `BWservers`(ID,NAME,MAP,PLAYERC,MAXP,STATE)\nvalues ('"+Bedwars.getSignID()+"','"+Bedwars.getServerName()+"','" + Bedwars.getMapName() + "', '" +0+"','"+16+"','"+"LOBBY"+"');");
+             statement.executeUpdate();
     	}catch(Exception e){
     		e.printStackTrace();
     	}
@@ -44,31 +54,35 @@ public class Signs {
    
     public static void setStateIngame(){
     	try {
-    		connection.executeUpdate("UPDATE `BWservers` SET STATE='"+"INGAME"+"' WHERE ID='"+Bedwars.getSignID()+"';");
-    } catch (Exception e) {
+    		PreparedStatement statement = connection.prepareStatement("UPDATE `BWservers` SET STATE='"+"INGAME"+"' WHERE ID='"+Bedwars.getSignID()+"';");
+            statement.executeUpdate();
+    	} catch (Exception e) {
             e.printStackTrace();
     }
     }
 
     	public static void setStateLobby(){
         	try {
-                connection.executeUpdate("UPDATE `BWservers` SET STATE="+"LOBBY"+" WHERE ID="+Bedwars.getSignID()+";");
-        } catch (Exception e) {
+        		PreparedStatement statement = connection.prepareStatement("UPDATE `BWservers` SET STATE="+"LOBBY"+" WHERE ID="+Bedwars.getSignID()+";");
+                statement.executeUpdate();
+        	} catch (Exception e) {
                 e.printStackTrace();
         }
     	
     }
     public static void setPlayerc(int playerc){
     	try {
-            connection.executeUpdate("UPDATE `BWservers` SET PLAYERC="+Bedwars.getLobbyPCount()+" WHERE ID="+Bedwars.getSignID()+";");
-    } catch (Exception e) {
+    		PreparedStatement statement = connection.prepareStatement("UPDATE `BWservers` SET PLAYERC="+Bedwars.getLobbyPCount()+" WHERE ID="+Bedwars.getSignID()+";");
+            statement.executeUpdate();
+    	} catch (Exception e) {
             e.printStackTrace();
     }
     }
     public static String getid(){
  	   
 	        try {
-	             ResultSet result =connection.select("select STATE from BWservers where ID='" +1 + "'");
+	        	PreparedStatement statement = connection.prepareStatement("select STATE from BWservers where ID='" +Bedwars.getSignID() + "'");
+	             ResultSet result = statement.executeQuery();
 
 	               
 	                if (result.next()) {
@@ -82,6 +96,11 @@ public class Signs {
 	        }
 	    }
     public static void disconnectMySQL(){
-    	connection.disconnect();
+    	try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

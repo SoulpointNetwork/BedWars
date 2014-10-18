@@ -28,6 +28,9 @@ public class DamageEvent implements Listener{
 	public void damageEvent(EntityDamageEvent e){
 		if(e.getEntity() instanceof Player){
 		Player p = (Player) e.getEntity();
+		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
+			e.setCancelled(true);
+		}
 		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
 			if(e.getEntity() instanceof Villager){
 				e.setCancelled(true);

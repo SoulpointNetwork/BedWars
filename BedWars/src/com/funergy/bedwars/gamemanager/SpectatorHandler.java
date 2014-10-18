@@ -38,8 +38,17 @@ public class SpectatorHandler implements Listener{
 	        spectators.add(p);
 	        for(Player pl : Bukkit.getOnlinePlayers()){
 	        		pl.hidePlayer(p);
+	        		
 	        }
+	        for(Player pl : spectators){
+	        	p.hidePlayer(pl);
+	        }
+			p.teleport(new Location(Bukkit.getWorld("world"),-303,28,-304));
 	        p.getInventory().setItem(0, itemStack(Material.COMPASS,1,null,"§aTeleporter","Right click to use"));
+	}
+	public static void removeSpectator(Player p){
+		spectators.remove(p);
+	
 	}
 	@SuppressWarnings("deprecation")
 	public static ItemStack itemStack(Material mat, Integer amount,DyeColor c ,String displayname, String Lore){

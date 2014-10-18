@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.InGameHandler;
+import com.funergy.bedwars.gamemanager.SpectatorHandler;
 import com.funergy.bedwars.gamemanager.Teams;
 
 /**
@@ -47,12 +48,17 @@ public class LeaveEvent implements Listener{
 			if(InGameHandler.green.size() == 0 && InGameHandler.red.size() == 0 && InGameHandler.blue.size() == 0){
 				InGameHandler.yellowWins();
 			}
-			Teams.removePlayerFromTeam(e.getPlayer());
 			e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
 			e.getPlayer().getInventory().clear();
 
 			
 		}
+			Teams.removePlayerFromTeam(e.getPlayer());
+			if(SpectatorHandler.spectators.contains(e.getPlayer())){
+				SpectatorHandler.removeSpectator(e.getPlayer());
+			}
+		    e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
+			e.getPlayer().getInventory().clear();
 	}
 	@EventHandler
 	public void onKickEvent(PlayerKickEvent e){
@@ -77,12 +83,13 @@ public class LeaveEvent implements Listener{
 			if(InGameHandler.green.size() == 0 && InGameHandler.red.size() == 0 && InGameHandler.blue.size() == 0){
 				InGameHandler.yellowWins();
 			}
-			Teams.removePlayerFromTeam(e.getPlayer());
 			e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
 			e.getPlayer().getInventory().clear();
 
 			
 		}
+			Teams.removePlayerFromTeam(e.getPlayer());
+			
 	}
 
 }

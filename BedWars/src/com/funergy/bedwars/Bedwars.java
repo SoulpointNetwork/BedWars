@@ -8,8 +8,6 @@
  ******************************************************************/
 package com.funergy.bedwars;
 
-import nl.soulpoint.api.mysql.SoulPointMySQL;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.WorldCreator;
@@ -47,12 +45,11 @@ public class Bedwars extends JavaPlugin{
 	 static int spectatecount = 0;
 	 static String gameState = "lobby";
 	public static boolean isInList=false;
-	 static String mapName ="Test map";
+	 static String mapName ="Quartz";
 	 static String serverName ="BW01";
 	 static int id = 1;
 	 public Signs s;
 	    private static Signs mysql;
-	 private static SoulPointMySQL connection;
 
 	 static String gamePrefix = ChatColor.GRAY+"["+ChatColor.RED+"BedWars"+ChatColor.GRAY+"]: "+ChatColor.WHITE;
 	
@@ -99,14 +96,13 @@ public class Bedwars extends JavaPlugin{
 	public static Integer getSignID(){return id;}
 
 	public static void setIngameCount(Integer i){ingamecount=i;}
+	@SuppressWarnings("static-access")
 	public static void setLobbyCount(Integer i){
 		lobbypcount=i; 
 	    if(isInList){
 		mysql = new Signs();
-		connection = new SoulPointMySQL();
-        connection.connect();
 		Signs.setPlayerc(i);
-		connection.disconnect();
+		mysql.disconnectMySQL();
 		}}
 	public static void setSpectateCount(Integer i){spectatecount=i;}
 
@@ -115,18 +111,16 @@ public class Bedwars extends JavaPlugin{
 		
 		new BukkitRunnable(){
 
+			@SuppressWarnings("static-access")
 			@Override
 			public void run() {
 				if(getGameState().equalsIgnoreCase("lobby")){
-					Bukkit.broadcastMessage("trying");
 					mysql = new Signs();
-					connection = new SoulPointMySQL();
-			        connection.connect();
 					if(Signs.getid() == null){
 					Signs.setId();
 					System.out.println("Sign is in mysql");
 					isInList = true;
-					Signs.disconnectMySQL();
+					mysql.disconnectMySQL();
 					this.cancel();
 					return;
 					}
@@ -150,6 +144,7 @@ public class Bedwars extends JavaPlugin{
 		if(cmd.getName().equalsIgnoreCase("ending")){
 			if(sender.isOp()){
 				InGameHandler.end();
+				InGameHandler.resetmap();
 			}
 		}
 	return false;

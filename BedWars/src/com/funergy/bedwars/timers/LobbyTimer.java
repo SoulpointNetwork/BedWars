@@ -33,7 +33,7 @@ public class LobbyTimer extends BukkitRunnable{
 	public void run() {
 		if(Bedwars.getGameState().equalsIgnoreCase("LOBBY")){
 		if (i == 0) {
-			if(Bedwars.getLobbyPCount() >=8){
+			if(Bedwars.getLobbyPCount() >=4){
 				InGameHandler.startGame();
 				this.cancel();
 				return;

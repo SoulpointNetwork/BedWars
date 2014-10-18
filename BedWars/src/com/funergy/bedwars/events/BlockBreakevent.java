@@ -67,11 +67,9 @@ public class BlockBreakevent implements Listener {
 			}
 			if(e.getBlock().getType() == Material.CHEST){
 				if(ChestHandler.isChest(e.getBlock().getLocation())){
-				if(ChestHandler.getTeamFromChest(e.getBlock().getLocation()).equalsIgnoreCase(InGameHandler.getTeam(e.getPlayer()))){
 				ChestHandler.removeChest(e.getBlock().getLocation());
-				}else{
-					e.setCancelled(true);
-				}
+				e.getBlock().getDrops().clear();
+				
 				}
 			}
 			if(!materials.contains(e.getBlock().getType())){

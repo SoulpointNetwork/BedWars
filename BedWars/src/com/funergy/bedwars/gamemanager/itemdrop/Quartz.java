@@ -18,6 +18,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.funergy.bedwars.Bedwars;
+
 /**
  * @author Funergy
  *
@@ -29,11 +31,13 @@ public class Quartz extends BukkitRunnable{
 
 	@Override
 	public void run() {
+		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
+
     Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,35,-175),itemStack(Material.QUARTZ,1,"Quartz",null));
     Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-280,35,-230),itemStack(Material.QUARTZ,1,"Quartz",null));
     Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,35,-285),itemStack(Material.QUARTZ,1,"Quartz",null));
     Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-170,35,-230),itemStack(Material.QUARTZ,1,"Quartz",null));
-
+		}
 	}
 	
 	

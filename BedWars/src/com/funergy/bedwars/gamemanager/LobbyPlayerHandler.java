@@ -27,7 +27,7 @@ import com.funergy.bedwars.Bedwars;
  *
  */
 public class LobbyPlayerHandler {
-	
+	public static boolean counting;
 	public static void setLobbyPlayerCount(Integer pcount){
 		Bedwars.setLobbyCount(pcount);
 	}

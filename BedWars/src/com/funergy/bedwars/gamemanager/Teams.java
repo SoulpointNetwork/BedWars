@@ -8,6 +8,9 @@
  ******************************************************************/
 package com.funergy.bedwars.gamemanager;
 
+import java.util.Random;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -19,36 +22,91 @@ import com.funergy.bedwars.Bedwars;
  */
 public class Teams {
 	
-	public static void randomTeam(Player p){
+	public static void setRandomTeam(Player p){
 		int red =InGameHandler.red.size();
 		int blue =InGameHandler.blue.size();
 		int yellow =InGameHandler.yellow.size();
 		int green =InGameHandler.green.size();
+		if(getHighestTeam() == null){
+			String team = getRandomTeam();
+			InGameHandler.addToTeam(p,team);
+			if(team.equalsIgnoreCase("yellow")){
+				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.YELLOW+team.toUpperCase());
+				}
+				if(team.equalsIgnoreCase("green")){
+					p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.GREEN+team.toUpperCase());
+					}
+				if(team.equalsIgnoreCase("blue")){
+					p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+team.toUpperCase());
+					}
+				if(team.equalsIgnoreCase("red")){
+					p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.RED+team.toUpperCase());
+					}
+				ScoreBoardManager.updateSB();
 
-		if(red < blue && red<green && red < yellow){
+			return;
+		}
+		if(red < getHighestTeam()){
 			InGameHandler.addToTeam(p, "red");
 			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.RED+"RED");
 			ScoreBoardManager.updateSB();
 			return;
 		}
-		if(green < blue && green < yellow && green < red){
+		if(green < getHighestTeam()){
 			InGameHandler.addToTeam(p, "green");
 			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.GREEN+"GREEN");
 			ScoreBoardManager.updateSB();
 			return;
 		}
-		if(yellow <green && yellow < red && yellow < blue){
+		if(yellow < getHighestTeam()){
 			InGameHandler.addToTeam(p, "yellow");
 			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.YELLOW+"YELLOW");
 			ScoreBoardManager.updateSB();
 			return;
 		}
-		if(blue < green && blue < yellow && blue < red){
+		if(blue < getHighestTeam()){
 			InGameHandler.addToTeam(p, "blue");
 			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+"BLUE");
 			ScoreBoardManager.updateSB();
 			return;
 		}
+	}
+	private static String getRandomTeam(){
+		int i = new Random().nextInt(3);
+		if(i == 0){
+			return "green";
+		}
+		if(i == 1){
+			return "yellow";
+		}
+		if(i == 2){
+			return "blue";
+		}
+		if(i == 3){
+			return "red";
+		}
+		return null;
+		
+	}
+	public static Integer getHighestTeam(){
+		int red =InGameHandler.red.size();
+		int blue =InGameHandler.blue.size();
+		int yellow =InGameHandler.yellow.size();
+		int green =InGameHandler.green.size();
+		if(red > blue && red > green && red > yellow){
+			return red;
+		}
+		if(green > red && green > yellow && green > blue){
+			return green;
+		}
+		if(yellow > red && yellow > blue && yellow > green){
+			return yellow;
+		}
+		if(blue > red && blue > yellow && blue > green){
+			return green;
+		}
+		return null;
+		
 	}
 	public static void addToTeam(Player p,String team){
 		int red = InGameHandler.red.size();
@@ -68,7 +126,7 @@ public class Teams {
 			}
 		}
 		if(team.equalsIgnoreCase("blue")){
-			if(blue <= red && blue <=yellow && blue <= green){
+			if(blue <= red && blue <= yellow && blue <= green){
 				if(InGameHandler.getTeam(p)!=null){
 					Teams.removePlayerFromTeam(p);
 				}

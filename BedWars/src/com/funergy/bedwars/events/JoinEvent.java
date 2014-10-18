@@ -15,7 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.funergy.bedwars.Bedwars;
-import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.gamemanager.LobbyPlayerHandler;
 import com.funergy.bedwars.gamemanager.ScoreBoardManager;
 import com.funergy.bedwars.gamemanager.SpectatorHandler;
@@ -40,22 +39,20 @@ public class JoinEvent implements Listener {
 		  e.getPlayer().setHealth(20);
 		  e.setJoinMessage(Bedwars.getGamePrefix()+ChatColor.GREEN+e.getPlayer().getName()+ChatColor.WHITE+" Has joined the game ("+Bedwars.getLobbyPCount()+"/16)");
 		  
-		  if(Bedwars.getLobbyPCount() >= 8){
-				int red = InGameHandler.red.size();
-				int blue = InGameHandler.blue.size();
-				int yellow = InGameHandler.yellow.size();
-				int green = InGameHandler.green.size();
-				if(red >= 2 && blue >= 2 && yellow>=2&&green>=2){
-			  new LobbyTimer(30).runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 1000);
-				}
-		  }
-		  
-		}else if(Bedwars.getGameState().equalsIgnoreCase("INGAME")||Bedwars.getGameState().equalsIgnoreCase("end")){
+		  if(Bedwars.getLobbyPCount() >= 4){
+			  if(!LobbyPlayerHandler.counting){
+			  new LobbyTimer(30).runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 20);
+			  LobbyPlayerHandler.counting = true;
+			  }
+		}
+		}
+		if(Bedwars.getGameState().equalsIgnoreCase("ingame")||Bedwars.getGameState().equalsIgnoreCase("end")){
+			e.setJoinMessage(null);
 			SpectatorHandler.addSpectator(e.getPlayer());
 			  e.getPlayer().setFoodLevel(20);
 			  e.getPlayer().setHealth(20);
-			e.setJoinMessage(null);
-		
+			
 		}
+		
 	}
 }
