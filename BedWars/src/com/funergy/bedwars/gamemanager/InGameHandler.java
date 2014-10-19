@@ -38,7 +38,6 @@ import com.funergy.bedwars.gamemanager.itemdrop.Gold;
 import com.funergy.bedwars.gamemanager.itemdrop.Quartz;
 import com.funergy.bedwars.mysql.Signs;
 import com.funergy.bedwars.timers.InGameTimer;
-import com.funergy.bedwars.utils.WorldManager;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
@@ -155,8 +154,8 @@ public class InGameHandler {
 	public static void resetmap(){
 		new BukkitRunnable(){	
 			public void run(){
-				WorldManager.unloadWorld(Bukkit.getWorld("map"));
-				WorldManager.deleteWorld(WorldManager.deleteFolder);
+				WorldHandler.unloadWorld(Bukkit.getWorld("map"));
+				WorldHandler.deleteWorld(WorldHandler.deleteFolder);
 			
 			}
 			}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 350);
@@ -164,7 +163,7 @@ public class InGameHandler {
 			
 			new BukkitRunnable(){	
 			public void run(){
-				WorldManager.copyWorld(WorldManager.sourceFolder, WorldManager.targetFolder);
+				WorldHandler.copyWorld(WorldHandler.sourceFolder, WorldHandler.targetFolder);
 				}
 				}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 500);
 			
