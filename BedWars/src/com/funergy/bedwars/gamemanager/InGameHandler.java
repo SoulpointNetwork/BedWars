@@ -15,6 +15,7 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.WorldCreator;
@@ -37,6 +38,7 @@ import com.funergy.bedwars.gamemanager.itemdrop.Gold;
 import com.funergy.bedwars.gamemanager.itemdrop.Quartz;
 import com.funergy.bedwars.mysql.Signs;
 import com.funergy.bedwars.timers.InGameTimer;
+import com.funergy.bedwars.utils.WorldManager;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
@@ -135,16 +137,6 @@ public class InGameHandler {
 			for(Player p : Bukkit.getOnlinePlayers()){
 				p.getInventory().setArmorContents(new ItemStack[4]);
 				p.getInventory().clear();
-				p.teleport(new Location(Bukkit.getWorld("world"),-303,28,-304));
-				
-				
-			}
-			for(Player p : SpectatorHandler.spectators){
-				p.getInventory().setArmorContents(new ItemStack[4]);
-				p.getInventory().clear();
-				p.teleport(new Location(Bukkit.getWorld("world"),-303,28,-304));
-		
-				
 			}
 			}
 			}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 80);
@@ -163,8 +155,8 @@ public class InGameHandler {
 	public static void resetmap(){
 		new BukkitRunnable(){	
 			public void run(){
-				Bukkit.unloadWorld("map", false);
-				
+				WorldManager.unloadWorld(Bukkit.getWorld("map"));
+				WorldManager.deleteWorld(WorldManager.deleteFolder);
 			
 			}
 			}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 350);
@@ -172,10 +164,7 @@ public class InGameHandler {
 			
 			new BukkitRunnable(){	
 			public void run(){
-					Bukkit.getServer().createWorld(new WorldCreator("map"));
-					Bukkit.getWorld("map").setAutoSave(false);
-					
-				
+				WorldManager.copyWorld(WorldManager.sourceFolder, WorldManager.targetFolder);
 				}
 				}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 500);
 			

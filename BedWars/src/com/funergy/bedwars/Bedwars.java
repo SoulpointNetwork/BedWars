@@ -10,6 +10,7 @@ package com.funergy.bedwars;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -33,7 +34,6 @@ import com.funergy.bedwars.events.VillagerRightClick;
 import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.gamemanager.SpectatorHandler;
 import com.funergy.bedwars.mysql.Signs;
-import com.funergy.bedwars.timers.LobbyTimer;
 
 /**
  * @author Funergy
@@ -72,8 +72,8 @@ public class Bedwars extends JavaPlugin{
 	    this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
 
-		Bukkit.getServer().createWorld(new WorldCreator("map"));
-		Bukkit.getWorld("map").setAutoSave(false);
+	    World w = Bukkit.getServer().createWorld(new WorldCreator("map"));
+	      w.setAutoSave(false);
 	
 		putInList();
 		

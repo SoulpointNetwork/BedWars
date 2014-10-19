@@ -26,8 +26,9 @@ public class VillagerRightClick implements Listener {
 		if(e.getRightClicked().getType()== EntityType.VILLAGER){
 			if(!SpectatorHandler.spectators.contains(e.getPlayer())){
 			ShopCategories.showShop(e.getPlayer());
-			e.setCancelled(true);
+			
 			}
+			e.setCancelled(true);
 		}
 		
 	}

@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
 import com.funergy.bedwars.Bedwars;
+import com.funergy.bedwars.gamemanager.SpectatorHandler;
 
 /**
  * @author Funergy
@@ -23,6 +24,9 @@ public class ItemDropEvent implements Listener {
 	@EventHandler
 	public void onItemDropEvent(PlayerDropItemEvent e){
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
+			e.setCancelled(true);
+		}
+		if(SpectatorHandler.spectators.contains(e.getPlayer())){
 			e.setCancelled(true);
 		}
 	}

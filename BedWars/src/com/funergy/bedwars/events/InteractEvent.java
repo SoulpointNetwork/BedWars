@@ -38,6 +38,19 @@ public class InteractEvent implements Listener {
 	public static ArrayList<Player> plist = new ArrayList<Player>();
 	@EventHandler
 	public void onRightClickEvent(PlayerInteractEvent e){
+		if(SpectatorHandler.spectators.contains(e.getPlayer())){
+			if(e.getPlayer().getItemInHand().getType() ==  Material.COMPASS){
+			Inventory inv = Bukkit.createInventory(null, 18,"Teleporter");
+			inv.setItem(3, itemStack(Material.WOOL,1, DyeColor.CYAN, "&bBlue team", null));
+			inv.setItem(4, itemStack(Material.WOOL,1, DyeColor.GREEN, "&aGreen team", null));
+			inv.setItem(5, itemStack(Material.WOOL,1, DyeColor.YELLOW, "&eYellow team", null));
+			inv.setItem(13, itemStack(Material.WOOL,1, DyeColor.RED, "&cRed team", null));
+			e.getPlayer().openInventory(inv);
+			return;
+			}else{
+				e.setCancelled(true);
+			}
+		}
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 			ItemStack is = e.getPlayer().getItemInHand();
 			if(is.getType() == Material.WOOL){
@@ -76,20 +89,11 @@ public class InteractEvent implements Listener {
 			}
 		}
 		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
-			if(e.getClickedBlock().getType() == Material.CHEST){
-				if(SpectatorHandler.spectators.contains(e.getPlayer())){
-					if(e.getPlayer().getItemInHand().getType() ==  Material.COMPASS){
-					Inventory inv = Bukkit.createInventory(null, 18,"Teleporter");
-					inv.setItem(3, itemStack(Material.WOOL,1, DyeColor.CYAN, "&bBlue team", null));
-					inv.setItem(4, itemStack(Material.WOOL,1, DyeColor.GREEN, "&aGreen team", null));
-					inv.setItem(5, itemStack(Material.WOOL,1, DyeColor.YELLOW, "&eYellow team", null));
-					inv.setItem(13, itemStack(Material.WOOL,1, DyeColor.RED, "&cRed team", null));
-					e.getPlayer().openInventory(inv);
-					}else{
-						e.setCancelled(true);
-					}
-				}
+			
+			
+				
 				if(e.getAction() == Action.RIGHT_CLICK_BLOCK){
+					if(e.getClickedBlock().getType() == Material.CHEST){
 			if(ChestHandler.isChest(e.getClickedBlock().getLocation())){
 				if(!ChestHandler.getTeamFromChest(e.getClickedBlock().getLocation()).equalsIgnoreCase(InGameHandler.getTeam(e.getPlayer()))){
 					e.setCancelled(true);
