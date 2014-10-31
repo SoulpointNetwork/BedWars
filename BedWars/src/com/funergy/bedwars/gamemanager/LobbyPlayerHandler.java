@@ -32,10 +32,10 @@ public class LobbyPlayerHandler {
 		Bedwars.setLobbyCount(pcount);
 	}
 	public static void giveItems(Player p){
-		p.getInventory().setItem(0, itemStack(Material.WOOL,DyeColor.CYAN, 1, "&bBlue team", "Right click to open the GUI"));
-		p.getInventory().setItem(1, itemStack(Material.WOOL,DyeColor.GREEN, 1, "&aGreen team", "Right click to open the GUI"));
-		p.getInventory().setItem(2, itemStack(Material.WOOL,DyeColor.RED, 1, "&cRed Team", "Right click to open the GUI"));
-		p.getInventory().setItem(3, itemStack(Material.WOOL,DyeColor.YELLOW, 1, "&eYellow Team", "Right click to open the GUI"));
+		p.getInventory().setItem(0, itemStack(Material.WOOL,DyeColor.CYAN, 1, "&bBlue team", "Right click to join team"));
+		p.getInventory().setItem(1, itemStack(Material.WOOL,DyeColor.GREEN, 1, "&aGreen team", "Right click to join team"));
+		p.getInventory().setItem(2, itemStack(Material.WOOL,DyeColor.RED, 1, "&cRed Team", "Right click to join team"));
+		p.getInventory().setItem(3, itemStack(Material.WOOL,DyeColor.YELLOW, 1, "&eYellow Team", "Right click to join team"));
 
 	}
 	public static void teleportPlayer(Player p){
@@ -51,6 +51,7 @@ public class LobbyPlayerHandler {
 		}
 		if(Lore != null){
 		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(Lore);
 		m.setLore(lore);
 		}
 		im.setItemMeta(m);

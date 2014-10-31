@@ -23,86 +23,69 @@ import com.funergy.bedwars.Bedwars;
 public class Teams {
 	
 	public static void setRandomTeam(Player p){
-		int red =InGameHandler.red.size();
-		int blue =InGameHandler.blue.size();
-		int yellow =InGameHandler.yellow.size();
-		int green =InGameHandler.green.size();
-		if(getHighestTeam() == null){
-			String team = getRandomTeam();
-			InGameHandler.addToTeam(p,team);
-			if(team.equalsIgnoreCase("yellow")){
+		        String team = giveBestTeam();
+			    if(team.equalsIgnoreCase("yellow")){
+			    InGameHandler.addToTeam(p, team);
 				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.YELLOW+team.toUpperCase());
 				}
 				if(team.equalsIgnoreCase("green")){
-					p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.GREEN+team.toUpperCase());
-					}
+					InGameHandler.addToTeam(p, team);
+				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.GREEN+team.toUpperCase());
+				}
 				if(team.equalsIgnoreCase("blue")){
-					p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+team.toUpperCase());
-					}
+					InGameHandler.addToTeam(p, team);
+				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+team.toUpperCase());
+				}
 				if(team.equalsIgnoreCase("red")){
-					p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.RED+team.toUpperCase());
-					}
+					InGameHandler.addToTeam(p, team);
+				p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.RED+team.toUpperCase());
+				}
 				ScoreBoardManager.updateSB();
-
-			return;
-		}
-		if(red < getHighestTeam()){
-			InGameHandler.addToTeam(p, "red");
-			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.RED+"RED");
-			ScoreBoardManager.updateSB();
-			return;
-		}
-		if(green < getHighestTeam()){
-			InGameHandler.addToTeam(p, "green");
-			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.GREEN+"GREEN");
-			ScoreBoardManager.updateSB();
-			return;
-		}
-		if(yellow < getHighestTeam()){
-			InGameHandler.addToTeam(p, "yellow");
-			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.YELLOW+"YELLOW");
-			ScoreBoardManager.updateSB();
-			return;
-		}
-		if(blue < getHighestTeam()){
-			InGameHandler.addToTeam(p, "blue");
-			p.sendMessage(Bedwars.getGamePrefix()+"You've joined team "+ ChatColor.AQUA+"BLUE");
-			ScoreBoardManager.updateSB();
-			return;
-		}
 	}
-	private static String getRandomTeam(){
-		int i = new Random().nextInt(3);
-		if(i == 0){
-			return "green";
-		}
-		if(i == 1){
-			return "yellow";
-		}
-		if(i == 2){
-			return "blue";
-		}
-		if(i == 3){
-			return "red";
-		}
-		return null;
-		
-	}
-	public static Integer getHighestTeam(){
+	public static String giveBestTeam(){
 		int red =InGameHandler.red.size();
 		int blue =InGameHandler.blue.size();
 		int yellow =InGameHandler.yellow.size();
 		int green =InGameHandler.green.size();
-		if(red > blue && red > green && red > yellow){
+		 if (red < blue && red < green && red < yellow){
+	            return "red";
+	        } else if (blue < red && blue < green && blue < yellow){
+	         return "blue"; 
+	        }else if(yellow < red && yellow < blue && yellow < green){
+	        	return "yellow";
+	        }else if(green < red && green < yellow && green < blue){
+	        	 return "green";
+	        } else {
+	            if (new Random().nextBoolean()){
+	                 if(new Random().nextBoolean()){
+	            	return "red";
+	                 }else{
+	            	return "blue";
+	                 }
+	            } else {
+	            	if(new Random().nextBoolean()){
+		            	return "green";
+	                 }else{
+	            	    return "yellow";
+	                 }
+	            }
+	        }
+	}
+	public static Integer getLowestTeam(){
+		int red =InGameHandler.red.size();
+		int blue =InGameHandler.blue.size();
+		int yellow =InGameHandler.yellow.size();
+		int green =InGameHandler.green.size();
+		if(red < blue && red < green && red < yellow){
 			return red;
 		}
-		if(green > red && green > yellow && green > blue){
+		if(green < red && green < yellow && green < blue){
 			return green;
 		}
-		if(yellow > red && yellow > blue && yellow > green){
+		if(yellow < red && yellow < blue && yellow < green){
 			return yellow;
 		}
-		if(blue > red && blue > yellow && blue > green){
+		if(blue < red && blue < yellow && blue < green){
 			return green;
 		}
 		return null;

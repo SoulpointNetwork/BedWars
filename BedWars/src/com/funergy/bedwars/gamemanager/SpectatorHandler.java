@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -33,8 +34,7 @@ public class SpectatorHandler implements Listener{
 
 	public static void addSpectator(Player p){
 		p.teleport(new Location(Bukkit.getWorld("world"),-303,28,-304));
-		p.setAllowFlight(true);
-	        p.setFlying(true);
+		p.setGameMode(GameMode.CREATIVE);
 	        spectators.add(p);
 	        for(Player pl : Bukkit.getOnlinePlayers()){
 	        		pl.hidePlayer(p);

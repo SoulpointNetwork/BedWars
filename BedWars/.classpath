@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 7 [1.7.0_51]"/>
 	<classpathentry kind="lib" path="/Users/nielsdewulf/Downloads/bukkit-1.7.9-R0.2.jar"/>
 	<classpathentry kind="lib" path="/Users/nielsdewulf/Downloads/craftbukkit-1.7.9-R0.2.jar"/>
 	<classpathentry kind="lib" path="/Users/nielsdewulf/Downloads/NametagEdit.jar"/>
-	<classpathentry kind="lib" path="/Users/nielsdewulf/Documents/server/Bungeecord/Craftbukkit/plugins/Plugins/SPAPI.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 7 [1.7.0_51]"/>
+	<classpathentry kind="lib" path="/Users/nielsdewulf/Documents/server/Bungeecord/Craftbukkit/plugins/SPAPI.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

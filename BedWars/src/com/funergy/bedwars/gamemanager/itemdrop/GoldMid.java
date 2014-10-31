@@ -24,21 +24,22 @@ import com.funergy.bedwars.Bedwars;
  * @author Funergy
  *
  */
-public class Gold extends BukkitRunnable{
-	public Gold() {
+public class GoldMid extends BukkitRunnable{
+	public GoldMid() {
 	}
 
 	@Override
 	public void run() {
-		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
-
-		Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,35,-175),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
-        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-280,35,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
-        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,35,-285),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
-        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-170,35,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));        
+		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){        
+    	Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,25,-225),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-220,25,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-225,25,-234),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
+        Bukkit.getWorld("map").dropItemNaturally(new Location(Bukkit.getWorld("map"),-229,25,-230),itemStack(Material.GOLD_INGOT,1,ChatColor.GOLD+"Gold",null));
 		}
+
 	}
-		
+	
+	
 	public static ItemStack itemStack(Material mat, Integer amount, String displayname, String Lore){
 		ItemStack im = new ItemStack(mat,amount);
 		ItemMeta m = im.getItemMeta();

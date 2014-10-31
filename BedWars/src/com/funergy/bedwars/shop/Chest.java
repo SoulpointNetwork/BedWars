@@ -30,7 +30,7 @@ public class Chest {
 
 	    Item chest = new Item(Material.CHEST, 1);
 
-	    Item enderchest = new Item(Material.ENDER_CHEST, 1);
+	    Item enderchest = new Item(Material.CHEST, 1);
 	    enderchest.setName(ChatColor.BOLD+"TeamChest [No team]");
 
 	   String team = InGameHandler.getTeam(p);

@@ -10,16 +10,22 @@ package com.funergy.bedwars.events;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.util.Vector;
 
 import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.ChestHandler;
 import com.funergy.bedwars.gamemanager.InGameHandler;
+import com.funergy.bedwars.gamemanager.SpectatorHandler;
 
 /**
  * @author Funergy
@@ -58,12 +64,20 @@ public class PlaceBlockEvent implements Listener {
 				tnt.setFuseTicks(60);
 				tnt.setVelocity(new Vector(0, 0.3, 0));
 			}
-			if(e.getBlock().getType() == Material.ENDER_CHEST){
-				e.getBlock().setType(Material.CHEST);
+			if(e.getBlock().getType() == Material.CHEST){
+				if(e.getItemInHand().getItemMeta().getDisplayName().startsWith("TeamChest")){
 				ChestHandler.addChest(e.getBlock().getLocation(), InGameHandler.getTeam(e.getPlayer()));
+				}
 			}
 		}
 	
+	}
+	@EventHandler
+	public void canBuild(BlockCanBuildEvent e){
+		if(!e.isBuildable()){
+			e.setBuildable(true);
+		}
+		
 	}
 
 }

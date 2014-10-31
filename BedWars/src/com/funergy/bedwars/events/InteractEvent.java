@@ -29,6 +29,7 @@ import com.funergy.bedwars.gamemanager.ChestHandler;
 import com.funergy.bedwars.gamemanager.InGameHandler;
 import com.funergy.bedwars.gamemanager.SpectatorHandler;
 import com.funergy.bedwars.gamemanager.Teams;
+import com.funergy.spapi.Handlers.RankHandler;
 
 /**
  * @author Funergy
@@ -41,10 +42,37 @@ public class InteractEvent implements Listener {
 		if(SpectatorHandler.spectators.contains(e.getPlayer())){
 			if(e.getPlayer().getItemInHand().getType() ==  Material.COMPASS){
 			Inventory inv = Bukkit.createInventory(null, 18,"Teleporter");
-			inv.setItem(3, itemStack(Material.WOOL,1, DyeColor.CYAN, "&bBlue team", null));
-			inv.setItem(4, itemStack(Material.WOOL,1, DyeColor.GREEN, "&aGreen team", null));
-			inv.setItem(5, itemStack(Material.WOOL,1, DyeColor.YELLOW, "&eYellow team", null));
-			inv.setItem(13, itemStack(Material.WOOL,1, DyeColor.RED, "&cRed team", null));
+			if(InGameHandler.blue.size()!=0){
+			inv.setItem(3, itemStack(Material.WOOL,InGameHandler.blue.size(), DyeColor.CYAN, ChatColor.BLUE+"Blue team", null));
+			}else{
+				inv.setItem(3, itemStack(Material.WOOL,1, DyeColor.CYAN,ChatColor.BLUE+""+ChatColor.STRIKETHROUGH+"Blue team",ChatColor.BLUE+"Eliminated"));
+			}
+			if(InGameHandler.green.size()!=0){
+			inv.setItem(4, itemStack(Material.WOOL,InGameHandler.green.size(), DyeColor.GREEN, ChatColor.GREEN+"Green team", null));
+			}else{
+				inv.setItem(4, itemStack(Material.WOOL,1, DyeColor.GREEN, ChatColor.GREEN+""+ChatColor.STRIKETHROUGH+"Green team", ChatColor.BLUE+"Eliminated"));
+			}
+			if(InGameHandler.yellow.size()!=0){
+			inv.setItem(5, itemStack(Material.WOOL,InGameHandler.yellow.size(), DyeColor.YELLOW, ChatColor.YELLOW+"Yellow team", null));
+			}else{
+				inv.setItem(5, itemStack(Material.WOOL,1, DyeColor.YELLOW, ChatColor.YELLOW+""+ChatColor.STRIKETHROUGH+"Yellow team",ChatColor.BLUE+"Eliminated" ));
+
+			}
+			if(InGameHandler.red.size()!=0){
+			inv.setItem(13, itemStack(Material.WOOL,InGameHandler.red.size(), DyeColor.RED, ChatColor.RED+"Red team", null));
+			}else{
+				inv.setItem(13, itemStack(Material.WOOL,1, DyeColor.RED, ChatColor.RED+""+ChatColor.STRIKETHROUGH+"Red team", ChatColor.BLUE+"Eliminated"));
+			}
+			int r = InGameHandler.red.size();
+			int b = InGameHandler.blue.size();
+			int y = InGameHandler.yellow.size();
+			int g = InGameHandler.green.size();
+			if(r+b+y+g==0){
+			inv.setItem(17, itemStack(Material.NETHER_STAR,1, null, ChatColor.GOLD+""+ChatColor.STRIKETHROUGH+"All", ChatColor.RED+"ERROR"));
+			}else{
+				inv.setItem(17, itemStack(Material.NETHER_STAR,r+b+y+g, null, "&6All",null));
+
+			}
 			e.getPlayer().openInventory(inv);
 			return;
 			}else{
@@ -52,6 +80,7 @@ public class InteractEvent implements Listener {
 			}
 		}
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
+			if(!RankHandler.getRank(e.getPlayer()).equalsIgnoreCase("None")){
 			ItemStack is = e.getPlayer().getItemInHand();
 			if(is.getType() == Material.WOOL){
 				if(!plist.contains(e.getPlayer())){
@@ -87,6 +116,9 @@ public class InteractEvent implements Listener {
 
 			
 			}
+		}else{
+		e.getPlayer().sendMessage(Bedwars.getGamePrefix()+ChatColor.RED+"You need a donator rank to choose team!");
+		}
 		}
 		if(Bedwars.getGameState().equalsIgnoreCase("ingame")){
 			

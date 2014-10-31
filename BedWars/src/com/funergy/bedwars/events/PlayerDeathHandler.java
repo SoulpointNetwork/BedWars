@@ -16,6 +16,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.AntiSpawnKill;
@@ -47,9 +49,11 @@ public class PlayerDeathHandler implements Listener{
 				e.setRespawnLocation(new Location(Bukkit.getWorld("map"),-173,25,-230));
 			}
 			e.getPlayer().sendMessage(Bedwars.getGamePrefix()+"You've respawned because your bed hasn't been broken.");
-			AntiSpawnKill.addPlayer(e.getPlayer());
+			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 100));
+			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200, 15));
 		}else{
 			SpectatorHandler.addSpectator(e.getPlayer());
+			e.setRespawnLocation(new Location(Bukkit.getWorld("world"),-303,28,-304));
 		}
 		
 	}

@@ -26,14 +26,10 @@ public class Blocks {
 	    Merchant inv = new Merchant();
 	    inv.setTitle("Blocks");
 
-	    Item sandstone = new Item(Material.SANDSTONE, 12);
-	    sandstone.setAmount(12);
-	    Item endstone = new Item(Material.ENDER_STONE, 10);
-	    endstone.setAmount(10);
-	    Item ironblock = new Item(Material.IRON_BLOCK, 8);
-	    ironblock.setAmount(8);
+	    Item sandstone = new Item(Material.SANDSTONE, 1);
+	    Item endstone = new Item(Material.ENDER_STONE, 3);
+	    Item ironblock = new Item(Material.IRON_BLOCK, 4);
 	    Item glowstone = new Item(Material.GLOWSTONE, 4);
-	    glowstone.setAmount(4);
 
 	    
 	    inv.addOffer(new MerchantOffer(Currency.getQuartz(p, 1), sandstone.getItem()));

@@ -9,6 +9,7 @@
 package com.funergy.bedwars.events;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.funergy.bedwars.gamemanager.InGameHandler;
+import com.funergy.bedwars.gamemanager.SpectatorHandler;
 import com.funergy.bedwars.shop.Armor;
 import com.funergy.bedwars.shop.Blocks;
 import com.funergy.bedwars.shop.Bows;
@@ -79,6 +81,7 @@ public class ShopCategories implements Listener {
 		}
 		if(Lore != null){
 		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(Lore);
 		m.setLore(lore);
 		}
 		im.setItemMeta(m);
@@ -122,137 +125,115 @@ public class ShopCategories implements Listener {
 		
 		
 		if(e.getInventory().getTitle().equalsIgnoreCase("Teleporter")){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD+"All")){
+				Inventory inv = Bukkit.createInventory(null, 18,"All teams");
+				for(Player p : InGameHandler.teams.keySet()){
+					inv.addItem(skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
+				}
+				e.getWhoClicked().openInventory(inv);
+			}else
 			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.AQUA+"Blue team")){
 				Inventory inv = Bukkit.createInventory(null, 18,"Blue team");
-				int i = 3;
+				Player ph = (Player)e.getWhoClicked();
 				for(Player p : InGameHandler.blue){
-					if(i == 3){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+1;
-					}
-					if(i == 4){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+1;
-					}
-					if(i == 5){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+8;
-					}
-					if(i == 13){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=3;
-					}
+					inv.addItem(skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
 				}
 				e.getWhoClicked().openInventory(inv);
-			}
+			}else
 			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GREEN+"Green team")){
 				Inventory inv = Bukkit.createInventory(null, 18,"Green team");
-				int i = 3;
 				for(Player p : InGameHandler.green){
-					if(i == 3){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+1;
-					}
-					if(i == 4){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+1;
-					}
-					if(i == 5){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+8;
-					}
-					if(i == 13){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=3;
-					}
+					inv.addItem(skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
 				}
 				e.getWhoClicked().openInventory(inv);
 
-			}
+			}else
 			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Yellow team")){
 				Inventory inv = Bukkit.createInventory(null, 18,"Yellow team");
-				int i = 3;
+
 				for(Player p : InGameHandler.yellow){
-					if(i == 3){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+1;
-					}
-					if(i == 4){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+1;
-					}
-					if(i == 5){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+8;
-					}
-					if(i == 13){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=3;
-					}
+					inv.addItem(skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
 				}
 				e.getWhoClicked().openInventory(inv);
+				}else
+					if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED+"Red team")){
+						Inventory inv = Bukkit.createInventory(null, 18,"Red team");
+						for(Player p : InGameHandler.red){
+							inv.addItem(skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
+						}
+						e.getWhoClicked().openInventory(inv);
 
-			}
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED+"Red team")){
-				Inventory inv = Bukkit.createInventory(null, 18,"Red team");
-				int i = 3;
-				for(Player p : InGameHandler.red){
-					if(i == 3){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+1;
-					}
-					if(i == 4){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+1;
-					}
-					if(i == 5){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=i+8;
-					}
-					if(i == 13){
-						inv.setItem(i, skull(Material.SKULL_ITEM,1,3,p.getName(),"Click to teleport"));
-						i=3;
-					}
+				}else{
+				e.getWhoClicked().closeInventory();
 				}
-				e.getWhoClicked().openInventory(inv);
-
-			}
+			
 			e.setCancelled(true);
-		}
+		}else
 		if(e.getInventory().getTitle().equalsIgnoreCase("Blue team")){
 			
 			Player p = (Player) e.getWhoClicked();
 			Player pl = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
+			if(InGameHandler.teams.containsKey(pl)){
 			p.teleport(pl);
+			}else{
+				p.sendMessage(ChatColor.RED+"That player is not in the game!");
+			}
 			p.closeInventory();
 			e.setCancelled(true);
-		}
+		}else
+        if(e.getInventory().getTitle().equalsIgnoreCase("All teams")){
+			
+			Player p = (Player) e.getWhoClicked();
+			Player pl = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
+			if(InGameHandler.teams.containsKey(pl)){
+			p.teleport(pl);
+			}else{
+				p.sendMessage(ChatColor.RED+"That player is not in the game!");
+			}
+			p.closeInventory();
+			e.setCancelled(true);
+		}else
 	    if(e.getInventory().getTitle().equalsIgnoreCase("Red team")){
 			
 			Player p = (Player) e.getWhoClicked();
 			Player pl = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
-			p.teleport(pl);
+			if(InGameHandler.teams.containsKey(pl)){
+				p.teleport(pl);
+				}else{
+					p.sendMessage(ChatColor.RED+"That player is not in the game!");
+				}
 			p.closeInventory();
 
 			e.setCancelled(true);
-		}
+		}else
 	    if(e.getInventory().getTitle().equalsIgnoreCase("Yellow team")){
 			
 			Player p = (Player) e.getWhoClicked();
 			Player pl = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
-			p.teleport(pl);
+			if(InGameHandler.teams.containsKey(pl)){
+				p.teleport(pl);
+				}else{
+					p.sendMessage(ChatColor.RED+"That player is not in the game!");
+				}
 			p.closeInventory();
 
 			e.setCancelled(true);
-		}
+		}else
 	    if(e.getInventory().getTitle().equalsIgnoreCase("Green team")){
 			
 			Player p = (Player) e.getWhoClicked();
 			Player pl = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
-			p.teleport(pl);
+			if(InGameHandler.teams.containsKey(pl)){
+				p.teleport(pl);
+				}else{
+					p.sendMessage(ChatColor.RED+"That player is not in the game!");
+				}
 			p.closeInventory();
 
 			e.setCancelled(true);
+		}else if(SpectatorHandler.spectators.contains(e.getWhoClicked())){
+			e.setCancelled(true);
+			e.getWhoClicked().closeInventory();
 		}
 	}
 		public static ItemStack skull(Material mat, Integer amount,int i,String displayname, String Lore){
@@ -264,6 +245,7 @@ public class ShopCategories implements Listener {
 			}
 			if(Lore != null){
 			ArrayList<String> lore = new ArrayList<String>();
+			lore.add(Lore);
 			m.setLore(lore);
 			}
 			im.setItemMeta(m);

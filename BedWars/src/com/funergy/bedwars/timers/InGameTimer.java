@@ -53,7 +53,7 @@ public class InGameTimer extends BukkitRunnable{
    			}
    			if(i == 1200){
    				Bukkit.broadcastMessage(Bedwars.getGamePrefix() +"Game ending in 20 minutes");
-   		
+   			}
    			if(i == 600){
    				Bukkit.broadcastMessage(Bedwars.getGamePrefix() +"Game ending in 10 minutes");
    			}
@@ -68,8 +68,6 @@ public class InGameTimer extends BukkitRunnable{
    			
    			i--;
 	   
-	
-       }
        }
        }
 }

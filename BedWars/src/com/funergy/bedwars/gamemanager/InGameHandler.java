@@ -8,24 +8,24 @@
  ******************************************************************/
 package com.funergy.bedwars.gamemanager;
 
-import java.sql.SQLException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Chunk;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.WorldCreator;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import ca.wacos.nametagedit.NametagAPI;
@@ -35,6 +35,7 @@ import com.funergy.bedwars.events.BlockBreakevent;
 import com.funergy.bedwars.events.PlaceBlockEvent;
 import com.funergy.bedwars.gamemanager.itemdrop.Diamond;
 import com.funergy.bedwars.gamemanager.itemdrop.Gold;
+import com.funergy.bedwars.gamemanager.itemdrop.GoldMid;
 import com.funergy.bedwars.gamemanager.itemdrop.Quartz;
 import com.funergy.bedwars.mysql.Signs;
 import com.funergy.bedwars.timers.InGameTimer;
@@ -54,11 +55,10 @@ public class InGameHandler {
 	public static ArrayList<Player> yellow = new ArrayList<Player>();
 	    private static Signs mysql;
 	public static void loadGameSettings(){
-		Bedwars.setGameState("lobby");{
+		Bedwars.setGameState("lobby");
 		BedHandler.setupBed();
 		PlaceBlockEvent.setup();
 		BlockBreakevent.setup();
-		}
 	}
 	
 	public static String getTeam(Player p){
@@ -70,11 +70,11 @@ public class InGameHandler {
 		}
 	
 	public static void addToTeam(Player p,String team){
-		teams.put(p, team);
 		if(team.equalsIgnoreCase("red"))red.add(p);
 		if(team.equalsIgnoreCase("blue"))blue.add(p);
 		if(team.equalsIgnoreCase("green"))green.add(p);
 		if(team.equalsIgnoreCase("yellow"))yellow.add(p);
+		teams.put(p, team);
 		
 		
 	}
@@ -83,63 +83,86 @@ public class InGameHandler {
 	}
 	@SuppressWarnings("static-access")
 	public static void startGame(){
-		
 		Bedwars.setGameState("INGAME");
 		if(Bedwars.isInList){
 			mysql = new Signs();
-			
 		    Signs.setStateIngame();
 		    mysql.disconnectMySQL();
 		}
-		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+"Game started!");
+		
 		for(Player p : Bukkit.getOnlinePlayers()){
 			p.getInventory().clear();
+			p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 10));
 			if(!teams.containsKey(p)){
 				Teams.setRandomTeam(p);
 			}
-			if(getTeam(p) == "red"){
-				NametagAPI.setPrefix(p.getName(), ChatColor.RED+"");
+		}
+			teleporting();
+			Bukkit.broadcastMessage(Bedwars.getGamePrefix()+"Everyone will be teleported to the map!");
+			
+		
+			
+	}
+	public static void teleporting(){
+	
+		new BukkitRunnable(){
+			int i = 0;
+			@Override
+			public void run() {
+				if(i==0){
+					for(Player p:red){
+						NametagAPI.setPrefix(p.getName(), ChatColor.RED+"");
+				        p.setPlayerListName(ChatColor.RED + p.getName());
+						p.teleport(new Location(Bukkit.getWorld("map"),-225,25,-178));
+					}
+					i=1;
+				}
+				if(i==1){
+					for(Player p:blue){
+						NametagAPI.setPrefix(p.getName(), ChatColor.AQUA+"");
+				        p.setPlayerListName(ChatColor.AQUA + p.getName());
+						p.teleport(new Location(Bukkit.getWorld("map"),-277,25,-230));
+					}
+					i=2;
+				}
+				if(i==2){
+					for(Player p:green){
+						NametagAPI.setPrefix(p.getName(), ChatColor.GREEN+"");
+				        p.setPlayerListName(ChatColor.GREEN + p.getName());
+						p.teleport(new Location(Bukkit.getWorld("map"),-225,25,-282));
+					}
+					i=3;
+				}
+				if(i==3){
+					for(Player p:yellow){
+						NametagAPI.setPrefix(p.getName(), ChatColor.YELLOW+"");
+				        p.setPlayerListName(ChatColor.YELLOW + p.getName());
+						p.teleport(new Location(Bukkit.getWorld("map"),-173,25,-230));
+					}
+					i=4;
+					
+				}
+				if(i==4){
+					Bukkit.broadcastMessage(Bedwars.getGamePrefix()+"Game started!");
+					new Quartz().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 100, 40);
+					new Gold().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 200, 320);
+					new GoldMid().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 500, 450);
+					new Diamond().runTaskTimer(Bedwars.getPlugin(Bedwars.class),750, 600);
+					new InGameTimer().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 20);	
+					this.cancel();
+					return;
+				}
+				
 			}
-            if(getTeam(p) == "blue"){
-				NametagAPI.setPrefix(p.getName(), ChatColor.AQUA+"");
-			}
-            if(getTeam(p) == "green"){
-				NametagAPI.setPrefix(p.getName(), ChatColor.GREEN+"");
-			}
-            if(getTeam(p) == "yellow"){
-				NametagAPI.setPrefix(p.getName(), ChatColor.YELLOW+"");
-			}
-		}
-		for(Player p:red){
-			p.teleport(new Location(Bukkit.getWorld("map"),-225,25,-178));
-		}
-		for(Player p:blue){
-			p.teleport(new Location(Bukkit.getWorld("map"),-277,25,-230));
-		}
-		for(Player p:green){
-			p.teleport(new Location(Bukkit.getWorld("map"),-225,25,-282));
-		}
-		for(Player p:yellow){
-			p.teleport(new Location(Bukkit.getWorld("map"),-173,25,-230));
-		}
-		new Quartz().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 100, 30);
-		new Gold().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 100, 320);
-		new Diamond().runTaskTimer(Bedwars.getPlugin(Bedwars.class),100, 400);
-		new InGameTimer().runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 20);
-		//Start dropping stuff
+			
+		}.runTaskTimer(Bedwars.getPlugin(Bedwars.class), 0, 50);
+		
 		
 	}
+	
 	public static void end(){
+		Bedwars.setGameState("end");
 		Bukkit.broadcastMessage(Bedwars.getGamePrefix()+ChatColor.RED+"Server restarting in 15 seconds");
-		new BukkitRunnable(){	
-			public void run(){
-			for(Player p : Bukkit.getOnlinePlayers()){
-				p.getInventory().setArmorContents(new ItemStack[4]);
-				p.getInventory().clear();
-			}
-			}
-			}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 80);
-			
 		new BukkitRunnable(){	
 		public void run(){
 		for(Player p : Bukkit.getOnlinePlayers()){
@@ -152,20 +175,35 @@ public class InGameHandler {
 	
 	
 	public static void resetmap(){
+		World delete = Bukkit.getWorld("map");
+		final File deleteFolder = delete.getWorldFolder();
+		
+		// The world to copy
+		World source = Bukkit.getWorld("BedwarsMap");
+		final File sourceFolder = source.getWorldFolder();
+		 
+		// The world to overwrite when copying
+		World target = Bukkit.getWorld("map");
+		final File targetFolder = target.getWorldFolder();
+		
 		new BukkitRunnable(){	
 			public void run(){
 				WorldHandler.unloadWorld(Bukkit.getWorld("map"));
-				WorldHandler.deleteWorld(WorldHandler.deleteFolder);
 			
 			}
-			}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 350);
-			
+			}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 300);
+			new BukkitRunnable(){	
+				public void run(){
+					WorldHandler.deleteWorld(deleteFolder);
+				
+				}
+				}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 400);
 			
 			new BukkitRunnable(){	
 			public void run(){
-				WorldHandler.copyWorld(WorldHandler.sourceFolder, WorldHandler.targetFolder);
+				WorldHandler.copyWorld(sourceFolder, targetFolder);
 				}
-				}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 500);
+				}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 550);
 			
 				
 				
@@ -174,7 +212,7 @@ public class InGameHandler {
 				Bukkit.shutdown();
 				
 				}
-				}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 700);
+				}.runTaskLater(Bedwars.getPlugin(Bedwars.class), 750);
 	}
 	 public static void connect(Player p){
 		 ByteArrayDataOutput out = ByteStreams.newDataOutput();

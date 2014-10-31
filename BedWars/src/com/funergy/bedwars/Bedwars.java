@@ -46,7 +46,7 @@ public class Bedwars extends JavaPlugin{
 	 static String gameState = "lobby";
 	public static boolean isInList=false;
 	 static String mapName ="Quartz";
-	 static String serverName ="BW01";
+	 static String serverName ="BW02";
 	 static int id = 1;
 	 public Signs s;
 	    private static Signs mysql;
@@ -54,6 +54,9 @@ public class Bedwars extends JavaPlugin{
 	 static String gamePrefix = ChatColor.GRAY+"["+ChatColor.RED+"BedWars"+ChatColor.GRAY+"]: "+ChatColor.WHITE;
 	
 	public void onEnable() {
+		 putInList();
+			
+		   
 		Bukkit.getPluginManager().registerEvents(new ShopCategories(), this);
 		Bukkit.getPluginManager().registerEvents(new VillagerRightClick(), this);
 		Bukkit.getPluginManager().registerEvents(new PlaceBlockEvent(), this);
@@ -71,14 +74,12 @@ public class Bedwars extends JavaPlugin{
 		Bukkit.getPluginManager().registerEvents(new ItemPickupevent(), this);
 	    this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
+	    Bukkit.getServer().createWorld(new WorldCreator("map"));
+	    Bukkit.getServer().createWorld(new WorldCreator("BedwarsMap"));
+	      InGameHandler.loadGameSettings();
+	    
 
-	    World w = Bukkit.getServer().createWorld(new WorldCreator("map"));
-	      w.setAutoSave(false);
-	
-		putInList();
 		
-	    InGameHandler.loadGameSettings();{
-	    System.out.println("[BedWars] Loaded game settings");}
 			
 	}
 

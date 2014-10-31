@@ -8,11 +8,13 @@
  ******************************************************************/
 package com.funergy.bedwars.events;
 
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.util.Vector;
 
 import com.funergy.bedwars.Bedwars;
 import com.funergy.bedwars.gamemanager.AntiSpawnKill;
@@ -24,8 +26,9 @@ import com.funergy.bedwars.gamemanager.SpectatorHandler;
  *
  */
 public class HitEvent implements Listener{
+	
 	@EventHandler
-	public void onHitEvent(EntityDamageByEntityEvent e){
+	public void onHitEvent(final EntityDamageByEntityEvent e){
 		if(Bedwars.getGameState().equalsIgnoreCase("lobby")){
 			e.setCancelled(true);
 		}
@@ -33,6 +36,19 @@ public class HitEvent implements Listener{
 			if(e.getEntity() instanceof Villager){
 				e.setCancelled(true);
 			}
+			if(e.getEntity() instanceof Player && e.getDamager() instanceof Arrow){
+				Arrow r = (Arrow) e.getDamager();
+				Player d = (Player) r.getShooter();
+				Player p = (Player) e.getEntity();
+				String ps = InGameHandler.getTeam(p);
+				String ds = InGameHandler.getTeam(d);
+				if(ps.equalsIgnoreCase(ds)){
+					e.setCancelled(true);
+					return;
+				}
+				
+			}
+			
 			if(e.getEntity() instanceof Player&&e.getDamager() instanceof Player){
 			Player p = (Player) e.getEntity();
 			Player d = (Player) e.getDamager();
@@ -60,4 +76,5 @@ public class HitEvent implements Listener{
 			e.setCancelled(true);
 		}
 	}
+	
 }

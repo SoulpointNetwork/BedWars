@@ -28,6 +28,7 @@ public class SimpleItemStack {
 		}
 		if(Lore != null){
 		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(Lore);
 		m.setLore(lore);
 		}
 		im.setItemMeta(m);

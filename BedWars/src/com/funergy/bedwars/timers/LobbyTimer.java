@@ -46,6 +46,11 @@ public class LobbyTimer extends BukkitRunnable{
 				return;
 			}
 		}
+		if(i == 20){
+			Bukkit.broadcastMessage(Bedwars.getGamePrefix() +"Map info:");
+			Bukkit.broadcastMessage(Bedwars.getGamePrefix() +"Name: Quartz");
+			Bukkit.broadcastMessage(Bedwars.getGamePrefix() +"Creator: Batteraaf");
+		}
 		if(i < 11){
 			Bukkit.broadcastMessage(Bedwars.getGamePrefix() +"Game starting in "+i);
 			for(Player p : Bukkit.getOnlinePlayers()){

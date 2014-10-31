@@ -35,9 +35,8 @@ public class DamageEvent implements Listener{
 			if(e.getEntity() instanceof Villager){
 				e.setCancelled(true);
 			}
-			if(AntiSpawnKill.isInList(p)){
-				e.setCancelled(true);
-			}
+			
+		
 		}
 		if(SpectatorHandler.spectators.contains(p)){
 			e.setCancelled(true);
@@ -47,5 +46,6 @@ public class DamageEvent implements Listener{
 		}
 		}
 	}
+
 
 }
